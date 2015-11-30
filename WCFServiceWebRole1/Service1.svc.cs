@@ -169,7 +169,13 @@ namespace WCFServiceWebRole1
 
         public int HentTemperatur(int startInterval, int slutInterval)
         {
-            throw new NotImplementedException();
+            using (DataContext datacontext = new DataContext())
+            {
+                var count = (from p in datacontext.Bevaegelser
+                             where p.Temperatur >= startInterval && p.Temperatur <= slutInterval
+                             select p).Count();
+                return count;
+            }
         }
 
         /// <summary>
