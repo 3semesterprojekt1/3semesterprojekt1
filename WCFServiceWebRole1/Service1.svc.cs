@@ -233,6 +233,29 @@ namespace WCFServiceWebRole1
             }
             return "Email eksisterer ikke i databasen";
         }
+        
+        public string OpdaterTidsrum(string fra, string til)
+        {
+            try
+            {
+                var f = TimeSpan.Parse(fra);
+                var t = TimeSpan.Parse(til);
+
+                int id = 1;
+                Tider tid = new Tider() { Fra = f, Id = id, Til = t };
+                using (DataContext client = new DataContext())
+                {
+                    client.Tider.AddOrUpdate(tid);
+                    client.SaveChanges();
+                    return "Tidsrummet blev ændret";
+                }
+            }
+            catch (Exception)
+            {
+                return "Udfyld alle felterne";
+            }
+            
+        }
 
         private void SendEmail(string modtager, string emne, string besked, string uniktIndhold = null)
         {
@@ -298,7 +321,7 @@ namespace WCFServiceWebRole1
                 }
             }
         }
-        bool Aktiver(TimeSpan serverTid, TimeSpan fra, TimeSpan til)
+        private bool Aktiver(TimeSpan serverTid, TimeSpan fra, TimeSpan til)
         {
             if (fra < til)
             {

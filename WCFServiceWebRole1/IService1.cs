@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using WCFServiceWebRole1.Models;
 
@@ -37,5 +38,7 @@ namespace WCFServiceWebRole1
 
         [OperationContract]
         string GlemtBrugernavn(string email);
+        [OperationContract]
+        string OpdaterTidsrum(string fra, string til);
     }
 }
