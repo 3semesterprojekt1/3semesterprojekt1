@@ -13,10 +13,12 @@ namespace TestProjekt
     {
         Service1Client client = new Service1Client();
         Service1 service = new Service1();
+        private Tider tider;
         private Brugere b;
         [TestInitialize]
         public void BeforeTest()
         {
+            tider = new Tider();
             b = new Brugere("Brugernavn", "Secret12", "email@email.dk");
         }
 
@@ -174,7 +176,30 @@ namespace TestProjekt
         {
             Assert.AreEqual("Email er ændret", client.OpdaterEmail("Jari", "sercret12@gmail.com"));
         }
-
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Tid()
+        {
+            tider.Fra1 = new TimeSpan(24, 00, 00);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Tid1()
+        {
+            tider.Fra1 = new TimeSpan(-1, 00, 00);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Tid2()
+        {
+            tider.Til1 = new TimeSpan(24, 00, 00);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Tid3()
+        {
+            tider.Til1 = new TimeSpan(-1, 00, 00);
+        }
         //[TestMethod]
         //public void Henttemperatur()
         //{

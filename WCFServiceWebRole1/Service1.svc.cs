@@ -163,7 +163,7 @@ namespace WCFServiceWebRole1
         {
             using (DataContext dataContext = new DataContext())
             {
-                var query = from q in dataContext.Bevaegelser orderby q.Dato descending select q;
+                var query = from q in dataContext.Bevaegelser orderby q.Dato descending, q.Tidspunkt descending select q;
                 return query.ToList();
             }
         }
@@ -295,13 +295,13 @@ namespace WCFServiceWebRole1
         [SuppressMessage("ReSharper", "FunctionNeverReturns")]
         private void SensorLoop()
         {
-            Task.Run((() => SetTrue()));
+            Task.Run((() => AktiverAlarm()));
             using (DataContext dataContext = new DataContext())
             {
                 var tid = (from q in dataContext.Tider where q.Id == 1 select q).SingleOrDefault();
                 while (true)
                 {
-                    if (Aktiver(DateTime.Now.TimeOfDay, tid.Fra, tid.Til))
+                    if (AktiverSensor(DateTime.Now.TimeOfDay, tid.Fra, tid.Til))
                     {
                         //Random r = new Random();
 
@@ -321,7 +321,7 @@ namespace WCFServiceWebRole1
                 }
             }
         }
-        private bool Aktiver(TimeSpan serverTid, TimeSpan fra, TimeSpan til)
+        private bool AktiverSensor(TimeSpan serverTid, TimeSpan fra, TimeSpan til)
         {
             if (fra < til)
             {
@@ -329,7 +329,7 @@ namespace WCFServiceWebRole1
             }
             return !(til < serverTid && serverTid < fra);
         }
-        private void SetTrue()
+        private void AktiverAlarm()
         {
             while (true)
             {
