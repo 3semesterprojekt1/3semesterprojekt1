@@ -163,18 +163,24 @@ namespace WCFServiceWebRole1
         {
             using (DataContext dataContext = new DataContext())
             {
-                return dataContext.Bevaegelser.ToList();
+                var query = from q in dataContext.Bevaegelser orderby q.Dato descending select q;
+                return query.ToList();
             }
         }
-
+        /// <summary>
+        /// Henter temperatur i det skrevne interval
+        /// </summary>
+        /// <param name="startInterval"></param>
+        /// <param name="slutInterval"></param>
+        /// <returns></returns>
         public int HentTemperatur(int startInterval, int slutInterval)
         {
             using (DataContext datacontext = new DataContext())
             {
-                var count = (from p in datacontext.Bevaegelser
-                             where p.Temperatur >= startInterval && p.Temperatur <= slutInterval
-                             select p).Count();
-                return count;
+                var query = from p in datacontext.Bevaegelser
+                    where p.Temperatur >= startInterval && p.Temperatur <= slutInterval
+                    select p;
+                return query.Count();
             }
         }
 
