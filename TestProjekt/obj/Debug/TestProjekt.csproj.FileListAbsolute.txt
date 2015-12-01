@@ -64,3 +64,5 @@ C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\E
 C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\TestProjekt\obj\Debug\TestProjekt.csprojResolveAssemblyReference.cache
 C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\TestProjekt\obj\Debug\TestProjekt.dll
 C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\TestProjekt\obj\Debug\TestProjekt.pdb
+C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\EntityFramework.SqlServer.xml

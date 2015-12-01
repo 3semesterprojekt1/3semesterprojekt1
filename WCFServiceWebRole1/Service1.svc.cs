@@ -275,9 +275,10 @@ namespace WCFServiceWebRole1
             Task.Run((() => SetTrue()));
             using (DataContext dataContext = new DataContext())
             {
+                var tid = (from q in dataContext.Tider where q.Id == 1 select q).SingleOrDefault();
                 while (true)
                 {
-                    if (DateTime.Now.Hour < 17 && DateTime.Now.Hour > 8)
+                    if (Aktiver(DateTime.Now.TimeOfDay, tid.Fra, tid.Til))
                     {
                         //Random r = new Random();
 
@@ -296,6 +297,14 @@ namespace WCFServiceWebRole1
                     }
                 }
             }
+        }
+        bool Aktiver(TimeSpan serverTid, TimeSpan fra, TimeSpan til)
+        {
+            if (fra < til)
+            {
+                return fra <= serverTid && serverTid <= til;
+            }
+            return !(til < serverTid && serverTid < fra);
         }
         private void SetTrue()
         {
