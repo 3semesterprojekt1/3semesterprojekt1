@@ -14,7 +14,7 @@ namespace SeleniumProjekt
     class Program
     {
         private const string Url = "http://localhost/3semesterprojekt/public/index.php";
-        private const string Placering = "C:/temp/Selenium/";
+        private const string Placering = @"C:\Users\SanneWinther\Dropbox\Projektmappe\Test\Selenium";
         static void Main(string[] args)
         {
             using (IWebDriver webDriver = new ChromeDriver())
