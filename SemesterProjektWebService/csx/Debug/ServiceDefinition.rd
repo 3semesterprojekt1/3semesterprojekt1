@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SemesterProjektWebService" generation="1" functional="0" release="0" Id="207bca7c-2a97-4282-a36a-f69e2a0e0a83" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SemesterProjektWebService" generation="1" functional="0" release="0" Id="b01cabc8-b863-4b4a-867c-86a16aa6c05d" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="SemesterProjektWebServiceGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -70,9 +70,9 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="084b8283-de75-430a-ade8-27ebdfe2f205" ref="Microsoft.RedDog.Contract\ServiceContract\SemesterProjektWebServiceContract@ServiceDefinition">
+    <implementation Id="39e163e6-506e-4af4-95f8-5319718f2686" ref="Microsoft.RedDog.Contract\ServiceContract\SemesterProjektWebServiceContract@ServiceDefinition">
       <interfacereferences>
-        <interfaceReference Id="cae87a98-60f5-4211-b3e1-302a7a7e2ec6" ref="Microsoft.RedDog.Contract\Interface\WCFServiceWebRole1:Endpoint1@ServiceDefinition">
+        <interfaceReference Id="5a7f4cda-617e-4c9a-9947-6d94da168fa3" ref="Microsoft.RedDog.Contract\Interface\WCFServiceWebRole1:Endpoint1@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/SemesterProjektWebService/SemesterProjektWebServiceGroup/WCFServiceWebRole1:Endpoint1" />
           </inPort>

@@ -31,7 +31,7 @@ namespace WCFServiceWebRole1
         {
             if (_client == null)
             {
-                _client = new UdpClient(Port) {EnableBroadcast = true};
+                _client = new UdpClient(Port) { EnableBroadcast = true };
             }
             if (_ipAddress == null)
             {
@@ -75,7 +75,7 @@ namespace WCFServiceWebRole1
                 {
                     try
                     {
-                        Brugere b = new Brugere() {Brugernavn = brugernavn, Password = password, Email = email};
+                        Brugere b = new Brugere() { Brugernavn = brugernavn, Password = password, Email = email };
                         dataContext.Brugere.Add(b);
                         dataContext.SaveChanges();
                         return brugernavn + " er oprettet i databasen";
@@ -104,10 +104,10 @@ namespace WCFServiceWebRole1
                 {
                     try
                     {
-                    b.Password = password;
-                    dataContext.Brugere.AddOrUpdate(b);
-                    dataContext.SaveChanges();
-                    return "Password er ændret";
+                        b.Password = password;
+                        dataContext.Brugere.AddOrUpdate(b);
+                        dataContext.SaveChanges();
+                        return "Password er ændret";
                     }
                     catch (ArgumentException ex)
                     {
@@ -134,11 +134,9 @@ namespace WCFServiceWebRole1
                 {
                     try
                     {
-
-                    
-                    b.Email = email;
-                    dataContext.Brugere.AddOrUpdate(b);
-                    dataContext.SaveChanges();
+                        b.Email = email;
+                        dataContext.Brugere.AddOrUpdate(b);
+                        dataContext.SaveChanges();
                         return "Email er ændret";
                     }
                     catch (ArgumentException ex)
@@ -149,7 +147,7 @@ namespace WCFServiceWebRole1
                 return "Der gik noget galt med at finde din bruger. Prøv igen";
             }
         }
-        
+
         public string Login(string brugernavn, string password)
         {
             throw new NotImplementedException();
@@ -178,8 +176,8 @@ namespace WCFServiceWebRole1
             using (DataContext datacontext = new DataContext())
             {
                 var query = from p in datacontext.Bevaegelser
-                    where p.Temperatur >= startInterval && p.Temperatur <= slutInterval
-                    select p;
+                            where p.Temperatur >= startInterval && p.Temperatur <= slutInterval
+                            select p;
                 return query.Count();
             }
         }
@@ -193,20 +191,27 @@ namespace WCFServiceWebRole1
         /// <returns>int med antal bevægelser</returns>
         public int HentTidspunkt(int aarstal, int maaned, int slutdag)
         {
-            if (aarstal.ToString().Length == 4 && maaned >= 1 && maaned <= 12 && slutdag >= 1 && slutdag <= 31)
+            try
             {
-                DateTime startsDato = new DateTime(aarstal, maaned, 1);
-                DateTime slutsDato = new DateTime(aarstal, maaned, slutdag);
-                using (DataContext dataContext = new DataContext())
+                if (aarstal.ToString().Length == 4 && maaned >= 1 && maaned <= 12 && slutdag >= 1 && slutdag <= 31)
                 {
-                    var query = from q in dataContext.Bevaegelser
-                        where q.Dato >= startsDato
-                        where q.Dato <= slutsDato
-                        select q;
-                    return query.Count();
+                    DateTime startsDato = new DateTime(aarstal, maaned, 1);
+                    DateTime slutsDato = new DateTime(aarstal, maaned, slutdag);
+                    using (DataContext dataContext = new DataContext())
+                    {
+                        var query = from q in dataContext.Bevaegelser
+                            where q.Dato >= startsDato
+                            where q.Dato <= slutsDato
+                            select q;
+                        return query.Count();
+                    }
                 }
+                return 0;
             }
-            return 0;
+            catch (Exception)
+            {
+                return 0;
+            }
         }
 
         public string GlemtPassword(string brugernavn)
@@ -233,7 +238,7 @@ namespace WCFServiceWebRole1
             }
             return "Email eksisterer ikke i databasen";
         }
-        
+
         public string OpdaterTidsrum(string fra, string til)
         {
             try
@@ -254,13 +259,13 @@ namespace WCFServiceWebRole1
             {
                 return "Udfyld alle felterne";
             }
-            
+
         }
 
         private void SendEmail(string modtager, string emne, string besked, string uniktIndhold = null)
         {
             // Emailoprettelse
-            var email = new SendGridMessage {From = new MailAddress("Service@pp.org", "Protect and Prevent")};
+            var email = new SendGridMessage { From = new MailAddress("Service@pp.org", "Protect and Prevent") };
             email.AddTo(@"User <" + modtager + ">");
             email.Subject = emne;
             email.Text = besked + "\r\n" + uniktIndhold;
