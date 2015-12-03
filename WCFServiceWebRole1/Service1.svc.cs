@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Sockets;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -214,9 +216,23 @@ namespace WCFServiceWebRole1
             }
         }
 
+
+        /// <summary>
+        /// Sender nyt password e-mail
+        /// </summary>
+        /// <param name="brugernavn"></param>
+        /// <returns></returns>
         public string GlemtPassword(string brugernavn)
         {
-            throw new NotImplementedException();
+            Brugere b = FindBruger(brugernavn);
+            if (b != null)
+            {
+                string pw = TilfaeldigStreng(6);
+                SendEmail(b.Email, "Nyt password", "Du har fået tilsendt nyt password. Passwordet er: " + pw);
+                OpdaterPassword(b.Brugernavn, KrypterStreng(pw));
+                return "E-mail er sendt til " + b.Email;
+            }
+            return "E-mailen findes ikke";
         }
 
         /// <summary>
@@ -387,6 +403,53 @@ namespace WCFServiceWebRole1
                 }
                 _alarmBool = false;
             }
+        }
+        private string TilfaeldigStreng(int passwordLaengde)
+        {
+            string smaaB = "abcdefghijkmnopqrstuvwxyz";
+            string storeB = "ABCDEFGHJKLMNOPQRSTUVWXYZ";
+            string tal = "0123456789";
+            char[] chars = new char[passwordLaengde];
+            char[] chars1 = new char[passwordLaengde];
+            char[] chars2 = new char[passwordLaengde];
+            Random rd = new Random();
+
+            for (int i = 0; i < passwordLaengde; i++)
+            {
+                chars[i] = smaaB[rd.Next(0, smaaB.Length)];
+            }
+            for (int i = 0; i < passwordLaengde; i++)
+            {
+                chars1[i] = storeB[rd.Next(0, storeB.Length)];
+            }
+            for (int i = 0; i < passwordLaengde; i++)
+            {
+                chars2[i] = tal[rd.Next(0, tal.Length)];
+            }
+            string s1 = new string(chars);
+            string s2 = new string(chars1);
+            string s3 = new string(chars2);
+            return s1 + s2 + s3;
+        }
+        private string KrypterStreng(string streng)
+        {
+            string source = streng;
+            using (MD5 md5Hash = MD5.Create())
+            {
+                string hash = Md5Hash(md5Hash, source);
+                return "P" + hash;
+            }
+        }
+
+        private string Md5Hash(MD5 md5Hash, string input)
+        {
+            byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+            StringBuilder sBuilder = new StringBuilder();
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+            return sBuilder.ToString();
         }
     }
 }

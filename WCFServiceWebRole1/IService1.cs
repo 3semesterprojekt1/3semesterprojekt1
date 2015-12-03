@@ -38,6 +38,7 @@ namespace WCFServiceWebRole1
 
         [OperationContract]
         string GlemtBrugernavn(string email);
+
         [OperationContract]
         string OpdaterTidsrum(string fra, string til);
     }

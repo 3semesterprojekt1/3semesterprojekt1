@@ -44,7 +44,7 @@ namespace WCFServiceWebRole1.Models
             {
                 throw new ArgumentException("Password skal være mere end 4 tegn");
             }
-            if (password.Length > 20)
+            if (password.Length > 40)
             {
                 throw new ArgumentException("Password skal være mindre end 20 tegn");
             }

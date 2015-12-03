@@ -180,25 +180,25 @@ namespace TestProjekt
         [ExpectedException(typeof(ArgumentException))]
         public void Tid()
         {
-            tider.Fra1 = new TimeSpan(24, 00, 00);
+            tider.Fra = new TimeSpan(24, 00, 00);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void Tid1()
         {
-            tider.Fra1 = new TimeSpan(-1, 00, 00);
+            tider.Fra = new TimeSpan(-1, 00, 00);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void Tid2()
         {
-            tider.Til1 = new TimeSpan(24, 00, 00);
+            tider.Til = new TimeSpan(24, 00, 00);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void Tid3()
         {
-            tider.Til1 = new TimeSpan(-1, 00, 00);
+            tider.Til = new TimeSpan(-1, 00, 00);
         }
         //[TestMethod]
         //public void Henttemperatur()
