@@ -152,7 +152,13 @@ namespace WCFServiceWebRole1
 
         public string Login(string brugernavn, string password)
         {
-            throw new NotImplementedException();
+            Brugere b1 = FindBruger(brugernavn);
+
+            if (b1.Brugernavn == brugernavn && b1.Password == KrypterStreng(password))
+            {
+                return b1.Brugernavn;
+            }
+            return "Brugeren fandtes ikke";
         }
 
         /// <summary>
@@ -229,7 +235,7 @@ namespace WCFServiceWebRole1
             {
                 string pw = TilfaeldigStreng(6);
                 SendEmail(b.Email, "Nyt password", "Du har fået tilsendt nyt password. Passwordet er: " + pw);
-                OpdaterPassword(b.Brugernavn, KrypterStreng(pw));
+                OpdaterPassword(b.Brugernavn, pw);
                 return "E-mail er sendt til " + b.Email;
             }
             return "E-mailen findes ikke";
@@ -268,6 +274,7 @@ namespace WCFServiceWebRole1
                 {
                     client.Tider.AddOrUpdate(tid);
                     client.SaveChanges();
+                    _ta = Task.Run((() => SensorLoop()));
                     return "Tidsrummet blev ændret";
                 }
             }
@@ -295,7 +302,7 @@ namespace WCFServiceWebRole1
             transportWeb.DeliverAsync(email);
 #pragma warning restore 4014
         }
-        private Brugere FindBruger(string brugernavn = null, int id = 0, string email = null)
+        public Brugere FindBruger(string brugernavn = null, int id = 0, string email = null)
         {
             using (DataContext dataContext = new DataContext())
             {
