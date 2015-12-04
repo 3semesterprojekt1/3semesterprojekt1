@@ -77,7 +77,7 @@ namespace WCFServiceWebRole1
                 {
                     try
                     {
-                        Brugere b = new Brugere() { Brugernavn = brugernavn, Password = password, Email = email };
+                        Brugere b = new Brugere() { Brugernavn = brugernavn, Password = KrypterStreng(password), Email = email };
                         dataContext.Brugere.Add(b);
                         dataContext.SaveChanges();
                         return brugernavn + " er oprettet i databasen";
@@ -154,9 +154,12 @@ namespace WCFServiceWebRole1
         {
             Brugere b1 = FindBruger(brugernavn);
 
-            if (b1.Password == KrypterStreng(password) && b1 != null)
+            if (b1 != null)
             {
-                return b1.Brugernavn;
+                if (b1.Password == KrypterStreng(password))
+                {
+                    return b1.Brugernavn;
+                }
             }
             return "Brugeren fandtes ikke";
         }

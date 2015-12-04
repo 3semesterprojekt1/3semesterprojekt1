@@ -1,6 +1,6 @@
-DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:02:46] Starting DiagnosticPlugin.exe DiagnosticPlugin-ShutdownEvent DiagnosticPlugin-TotalShutdownEvent -wadVer1v4
-DiagnosticsPlugin.exe Error: 0 : [04-12-2015 10:02:46] Failed to save IIS Directory state
-DiagnosticsPlugin.exe Error: 0 : [04-12-2015 10:02:46] System.Runtime.InteropServices.COMException (0x80040154): Hentning af COM-klassefabrikken for komponenten med CLSID {2B72133B-3F5B-4602-8952-803546CE3344} mislykkedes pga. følgende fejl: 80040154 Klassen er ikke registreret (Undtagelse fra HRESULT: 0x80040154 (REGDB_E_CLASSNOTREG)).
+DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:53:38] Starting DiagnosticPlugin.exe DiagnosticPlugin-ShutdownEvent DiagnosticPlugin-TotalShutdownEvent -wadVer1v4
+DiagnosticsPlugin.exe Error: 0 : [04-12-2015 10:53:38] Failed to save IIS Directory state
+DiagnosticsPlugin.exe Error: 0 : [04-12-2015 10:53:38] System.Runtime.InteropServices.COMException (0x80040154): Hentning af COM-klassefabrikken for komponenten med CLSID {2B72133B-3F5B-4602-8952-803546CE3344} mislykkedes pga. følgende fejl: 80040154 Klassen er ikke registreret (Undtagelse fra HRESULT: 0x80040154 (REGDB_E_CLASSNOTREG)).
    ved System.Runtime.Remoting.RemotingServices.AllocateUninitializedObject(RuntimeType objectType)
    ved System.Runtime.Remoting.Activation.ActivationServices.CreateInstance(RuntimeType serverType)
    ved System.Runtime.Remoting.Activation.ActivationServices.IsCurrentContextOK(RuntimeType serverType, Object[] props, Boolean bNewObj)
@@ -13,17 +13,17 @@ DiagnosticsPlugin.exe Error: 0 : [04-12-2015 10:02:46] System.Runtime.InteropSer
    ved Microsoft.Web.Administration.ServerManager.get_SitesSection()
    ved Microsoft.Web.Administration.ServerManager.get_Sites()
    ved Microsoft.Azure.Plugins.Plugin.DiagnosticsPluginManager.SaveIISDirectoryState()
-DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:02:46] Starting DiagnosticsPlugin
-DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:02:46] Emulator config file set to C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\SemesterProjektWebService\csx\Debug\roles\WCFServiceWebRole1\approot\diagnostics.wadcfgx
-DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:02:46] DiagnosticsStoreRootPath set to: C:\Users\SanneWinther\AppData\Local\dftmp\Resources\4ff58fd3-8dd5-4091-b805-9d971163b846
-DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:02:46] Loading config file: C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\SemesterProjektWebService\csx\Debug\roles\WCFServiceWebRole1\approot\diagnostics.wadcfgx
-DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:02:46] Checking VM Type
-DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:02:46] Emulator config file set to C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\SemesterProjektWebService\csx\Debug\roles\WCFServiceWebRole1\approot\diagnostics.wadcfgx
-DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:02:46] Extension set to Emulator Mode
-DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:02:46] Reading XML configuration file
-DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:02:46] Bypassing private config decryption
-DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:02:46] WadCfg is provided in initial configuration. Using that to initialize Diagnostics.
-DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:02:46] <PublicConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
+DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:53:38] Starting DiagnosticsPlugin
+DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:53:38] Emulator config file set to C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\SemesterProjektWebService\csx\Debug\roles\WCFServiceWebRole1\approot\diagnostics.wadcfgx
+DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:53:38] DiagnosticsStoreRootPath set to: C:\Users\SanneWinther\AppData\Local\dftmp\Resources\f79a5829-6b0f-4149-b07a-f2438f3cab8a
+DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:53:38] Loading config file: C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\SemesterProjektWebService\csx\Debug\roles\WCFServiceWebRole1\approot\diagnostics.wadcfgx
+DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:53:38] Checking VM Type
+DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:53:38] Emulator config file set to C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\SemesterProjektWebService\csx\Debug\roles\WCFServiceWebRole1\approot\diagnostics.wadcfgx
+DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:53:38] Extension set to Emulator Mode
+DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:53:38] Reading XML configuration file
+DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:53:39] Bypassing private config decryption
+DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:53:39] WadCfg is provided in initial configuration. Using that to initialize Diagnostics.
+DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:53:39] <PublicConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
   <WadCfg>
     <DiagnosticMonitorConfiguration overallQuotaInMB="4096">
       <DiagnosticInfrastructureLogs scheduledTransferLogLevelFilter="Error" />
@@ -54,11 +54,11 @@ DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:02:46] <PublicConfig xmlns
   </WadCfg>
   <StorageAccount>devstoreaccount1</StorageAccount>
 </PublicConfig>
-DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:02:46] Private setting is loaded
-DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:02:48] Successfully created checkpoint file C:\Users\SanneWinther\AppData\Local\dftmp\Resources\4ff58fd3-8dd5-4091-b805-9d971163b846\WAD0104\Configuration\Checkpoint.txt
-DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:02:48] Will use local resource directory C:\Users\SanneWinther\AppData\Local\dftmp\Resources\4ff58fd3-8dd5-4091-b805-9d971163b846\WAD0104
-DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:02:48] Will use endpoint https://core.windows.net for storage.
-DiagnosticsPlugin.exe Error: 0 : [04-12-2015 10:02:51] Exception in creating the ServerManager; is IIS installed?
+DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:53:39] Private setting is loaded
+DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:53:40] Successfully created checkpoint file C:\Users\SanneWinther\AppData\Local\dftmp\Resources\f79a5829-6b0f-4149-b07a-f2438f3cab8a\WAD0104\Configuration\Checkpoint.txt
+DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:53:40] Will use local resource directory C:\Users\SanneWinther\AppData\Local\dftmp\Resources\f79a5829-6b0f-4149-b07a-f2438f3cab8a\WAD0104
+DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:53:40] Will use endpoint https://core.windows.net for storage.
+DiagnosticsPlugin.exe Error: 0 : [04-12-2015 10:53:43] Exception in creating the ServerManager; is IIS installed?
  Error:System.Runtime.InteropServices.COMException (0x80040154): Hentning af COM-klassefabrikken for komponenten med CLSID {2B72133B-3F5B-4602-8952-803546CE3344} mislykkedes pga. følgende fejl: 80040154 Klassen er ikke registreret (Undtagelse fra HRESULT: 0x80040154 (REGDB_E_CLASSNOTREG)).
    ved System.Runtime.Remoting.RemotingServices.AllocateUninitializedObject(RuntimeType objectType)
    ved System.Runtime.Remoting.Activation.ActivationServices.CreateInstance(RuntimeType serverType)
@@ -72,8 +72,8 @@ DiagnosticsPlugin.exe Error: 0 : [04-12-2015 10:02:51] Exception in creating the
    ved Microsoft.Web.Administration.ServerManager.get_SitesSection()
    ved Microsoft.Web.Administration.ServerManager.get_Sites()
    ved Microsoft.Azure.Plugins.Plugin.WadConfigProcessor.AddDirectories(EventsType mdsEvents, Directories wadDirectories)
-DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:02:51] Running in emulator mode, crash dumps not enabled
-DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:02:52] In emulator mode and using devstore updating XStoreAccount info, command line args: -LocalPath "C:\Users\SanneWinther\AppData\Local\dftmp\Resources\4ff58fd3-8dd5-4091-b805-9d971163b846\WAD0104"  -ConfigFile "C:\Users\SanneWinther\AppData\Local\dftmp\Resources\4ff58fd3-8dd5-4091-b805-9d971163b846\WAD0104\Configuration\MaConfig.xml" -ShutDownEvent WADDM-ShutDown-c91849bdce0b456e86137871b21ad5eb  -TotalShutDownEvent WADDM-TotalShutDown-c91849bdce0b456e86137871b21ad5eb -InitializedEvent WADM-StartUp-c91849bdce0b456e86137871b21ad5eb -parent 16808 -events -wadVer1v4 -UseProxyServer -XStoreAccounts WadAccount#true#devstoreaccount1#Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==#http://127.0.0.1:10002#http://127.0.0.1:10001#http://127.0.0.1:10000
-DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:03:52] MonAgentHost.exe started
-DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:03:52] DiagnoticsPlugin started.
-DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:03:52] DiagnoticsPlugin now waiting on events "DiagnosticPlugin-ShutdownEvent", "DiagnosticPlugin-TotalShutdownEvent" or "DiagnosticPlugin-RestartEvent".
+DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:53:43] Running in emulator mode, crash dumps not enabled
+DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:53:44] In emulator mode and using devstore updating XStoreAccount info, command line args: -LocalPath "C:\Users\SanneWinther\AppData\Local\dftmp\Resources\f79a5829-6b0f-4149-b07a-f2438f3cab8a\WAD0104"  -ConfigFile "C:\Users\SanneWinther\AppData\Local\dftmp\Resources\f79a5829-6b0f-4149-b07a-f2438f3cab8a\WAD0104\Configuration\MaConfig.xml" -ShutDownEvent WADDM-ShutDown-f3b839cc61cb49a7b9823b70d3258681  -TotalShutDownEvent WADDM-TotalShutDown-f3b839cc61cb49a7b9823b70d3258681 -InitializedEvent WADM-StartUp-f3b839cc61cb49a7b9823b70d3258681 -parent 3680 -events -wadVer1v4 -UseProxyServer -XStoreAccounts WadAccount#true#devstoreaccount1#Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==#http://127.0.0.1:10002#http://127.0.0.1:10001#http://127.0.0.1:10000
+DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:54:44] MonAgentHost.exe started
+DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:54:44] DiagnoticsPlugin started.
+DiagnosticsPlugin.exe Information: 0 : [04-12-2015 10:54:44] DiagnoticsPlugin now waiting on events "DiagnosticPlugin-ShutdownEvent", "DiagnosticPlugin-TotalShutdownEvent" or "DiagnosticPlugin-RestartEvent".
