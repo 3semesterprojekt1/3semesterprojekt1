@@ -154,7 +154,7 @@ namespace WCFServiceWebRole1
         {
             Brugere b1 = FindBruger(brugernavn);
 
-            if (b1.Brugernavn == brugernavn && b1.Password == KrypterStreng(password))
+            if (b1.Password == KrypterStreng(password) && b1 != null)
             {
                 return b1.Brugernavn;
             }
