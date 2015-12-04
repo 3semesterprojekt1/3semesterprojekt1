@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="b131ab2f-2acc-44a5-873c-8dd257e79f74" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e7bf7256-3aa2-4f53-bfea-43a077180136" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,13 +19,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:5017/Service1.svc?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://ballingfirst1.cloudapp.net/Service1.svc?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Service1.xsd" MetadataType="Schema" ID="abf1d17a-cb81-475e-9873-9b560c872b8e" SourceId="1" SourceUrl="http://localhost:5017/Service1.svc?xsd=xsd1" />
-    <MetadataFile FileName="Service11.xsd" MetadataType="Schema" ID="cb1f542a-3f5b-4bf4-ab3b-2a1e51291662" SourceId="1" SourceUrl="http://localhost:5017/Service1.svc?xsd=xsd2" />
-    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="40101699-cfeb-4ac8-878c-f235e568a777" SourceId="1" SourceUrl="http://localhost:5017/Service1.svc?wsdl" />
-    <MetadataFile FileName="Service12.xsd" MetadataType="Schema" ID="a45426fe-32ca-4593-8a16-985c60cd16db" SourceId="1" SourceUrl="http://localhost:5017/Service1.svc?xsd=xsd0" />
+    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="9a272c0c-786b-41e7-8aa5-a026b75af4a2" SourceId="1" SourceUrl="http://ballingfirst1.cloudapp.net/Service1.svc?wsdl" />
+    <MetadataFile FileName="Service1.xsd" MetadataType="Schema" ID="c5cde651-65b3-4118-97a0-d7bdaf76dc5a" SourceId="1" SourceUrl="http://ballingfirst1.cloudapp.net/Service1.svc?xsd=xsd0" />
+    <MetadataFile FileName="Service11.xsd" MetadataType="Schema" ID="07cb6d0f-9613-4670-a225-8c5762bdd7c1" SourceId="1" SourceUrl="http://ballingfirst1.cloudapp.net/Service1.svc?xsd=xsd1" />
+    <MetadataFile FileName="Service12.xsd" MetadataType="Schema" ID="ed00cb7e-2cc3-458a-815b-004be901bc22" SourceId="1" SourceUrl="http://ballingfirst1.cloudapp.net/Service1.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

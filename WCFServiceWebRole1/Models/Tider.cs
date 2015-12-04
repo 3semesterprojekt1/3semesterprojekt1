@@ -19,29 +19,22 @@ namespace WCFServiceWebRole1.Models
         {
             TimeSpan f = TimeSpan.Parse(fra);
 
-            if (f == new TimeSpan(24, 00, 00))
+            if (f >= new TimeSpan(23, 59, 59) || f == new TimeSpan(-1, 0, 0))
             {
-                throw new ArgumentException(" udfyld en af felterne ");
+                throw new ArgumentException("Tallet er forkert");
             }
-            if (f == new TimeSpan(-1, 0, 0))
-            {
-                throw new ArgumentException("tallet må ikke være minus ");
-            }
+
         }
 
         public void Checktil(string til)
         {
             TimeSpan t = TimeSpan.Parse(til);
-            if (t == new TimeSpan(24, 00, 00))
+            if (t >= new TimeSpan(23, 59, 59) || t == new TimeSpan(-1, 0, 0))
             {
-                throw new ArgumentException(" udfyld en af felterne ");
+                throw new ArgumentException("Tallet er forkert");
             }
-            if (t == new TimeSpan(-1, 0, 0))
-            {
-                throw new ArgumentException("tallet må ikke være minus ");
-            }
-        }
 
+        }
         [DataMember]
         public TimeSpan Fra
         {

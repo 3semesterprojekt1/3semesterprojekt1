@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestProjekt.ServiceReference1;
 using WCFServiceWebRole1;
@@ -15,6 +16,7 @@ namespace TestProjekt
         Service1 service = new Service1();
         private Tider tider;
         private Brugere b;
+
         [TestInitialize]
         public void BeforeTest()
         {
@@ -22,242 +24,361 @@ namespace TestProjekt
             b = new Brugere("Brugernavn", "Secret12", "email@email.dk");
         }
 
+        #region TestPassword
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void TestPassword()
+        public void TestPasswordNull() //Unittest
         {
             b.Password = null;
         }
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void TestPassword1()
+        public void TestPasswordMinLaengde() //Unittest
         {
-            b.Password = "1A3";
+            b.Password = "1A3"; //3
         }
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void TestPassword2()
+        public void TestPasswordMaxLaengde() //Unittest
         {
-            b.Password = "123456789A23456789123";
+            b.Password = "123456789A23456789123123456789A2345678912"; //41
         }
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void TestPassword3()
+        public void TestPasswordBrugernavn() //Unittest
         {
             b.Password = "Brugernavn12";
         }
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void TestPassword4()
+        public void TestPasswordStortBogstav() //Unittest
         {
             b.Password = "jørgen12";
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void TestPassword5()
+        public void TestPasswordTal() //Unittest
         {
             b.Password = "Jørgenetto";
         }
+
+        #endregion
+
+        #region TestEmail
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void TestEmail()
+        public void TestEmailSnabelA() //Unittest
         {
             b.Email = "Meile.com";
         }
 
-        /// <summary>
-        /// slethistorik
-        /// </summary>
+        #endregion
 
-
-        [TestMethod]
-        public void Slethistorikunit()
-        {
-            Assert.AreEqual(null, service.SletHistorik(750));
-        }
-
+        #region TestSletHistorik
 
         [TestMethod]
-        public void Slethistorikintegration()
+        public void TestSletHistorik() //Unittest
         {
-            Assert.AreEqual(null, client.SletHistorik(750));
+            Random r = new Random();
+            bool actual = false;
+            Bevaegelser b1 = service.SletHistorik(r.Next(350, 530));
+            if (b1 != null)
+            {
+                actual = true;
+            }
+            using (DataContext dataContext = new DataContext())
+            {
+                dataContext.Bevaegelser.Add(b1);
+                dataContext.SaveChanges();
+            }
+            Assert.IsTrue(actual);
+
         }
 
+        public void TestSletHistorik1() //Integrationstest
+        {
+            Random r = new Random();
+            bool actual = false;
+            Bevaegelser b1 = client.SletHistorik(r.Next(350, 530));
+            if (b1 != null)
+            {
+                actual = true;
+            }
+            using (DataContext dataContext = new DataContext())
+            {
+                dataContext.Bevaegelser.Add(b1);
+                dataContext.SaveChanges();
+            }
+            Assert.AreEqual(true, actual);
+        }
 
+        #endregion
 
+        #region TestOpretBruger
 
+        [TestMethod]
+        public void TestOpretBruger() //Integrationstest (Brugernavnet findes allerede)
+        {
+            Assert.AreEqual("Brugernavnet findes allerede i databasen",
+                client.OpretBruger("Benjamin", "Secret12", "Belzamouri@gmail.com"));
+        }
 
+        [TestMethod]
+        public void TestOpretBruger2() //Integrationstest (Brugernavnet findes ikke allerede)
+        {
+            Random r = new Random();
+            string name = "linda" + r.Next(1000, 2000);
+            Assert.AreEqual(name + " er oprettet i databasen",
+                client.OpretBruger(name, "J4566785", name + "@gmail.com"));
+            using (DataContext dataContext = new DataContext())
+            {
 
+                Brugere b = dataContext.Brugere.FirstOrDefault(bruger => bruger.Brugernavn == name);
+                if (b != null)
+                {
+                    dataContext.Brugere.Remove(b);
+                    dataContext.SaveChanges();
+                }
+
+            }
+        }
+
+        #endregion
+
+        #region TestOpdaterPassword
+
+        [TestMethod]
+        public void TestOpdaterPassword() //Integrationstest (Brugernavn der ikke findes)
+        {
+            Assert.AreEqual("Der gik noget galt med at finde din bruger. Prøv igen",
+                client.OpdaterPassword("dskjfhkfhksd", "Ugsfsdfsdf"));
+        }
+
+        [TestMethod]
+        public void TestOpdaterPassword2() //Integrationstest (Brugernavn der findes)
+        {
+            Assert.AreEqual("Password er ændret", client.OpdaterPassword("Benjamin", "P98dfa50eee50910cb49bb06e65230e7d"));
+        }
+
+        #endregion
+
+        #region TestOpdaterEmail
+
+        [TestMethod]
+        public void TestOpdaterEmailSnabelA() //Integrationstest (Email mangler "@")
+        {
+            Assert.AreEqual("Email er forkert" + " (" + "Belzamourimail.com" + ")", client.OpdaterEmail("Benjamin", "Belzamourimail.com"));
+        }
 
         //[TestMethod]
-        //public void Opretbrugerunittest1()
+        //public void Opdateremailunittest()
         //{
-        //    Assert.AreEqual("Brugernavnet findes allerede i databasen", service.OpretBruger("Jari", "Gjhjlkjl", "jari@dinmor.dk"));
-        //}
-        //[TestMethod]
-        //public void Opretbrugerunittest2()
-        //{
-        //    Assert.AreEqual("Hans" + " er oprettet i databasen", service.OpretBruger("Hans", "J4566785", "Hans@gmail.com"));
-        //}
-
-
-
-        [TestMethod]
-        public void Opretbrugerintegration1()
-        {
-            Assert.AreEqual("Brugernavnet findes allerede i databasen", client.OpretBruger("Jari", "Gjhjlkjl", "jari@dinmor.dk"));
-        }
-        [TestMethod]
-        public void Opretbrugerintegration2()
-        {
-            Assert.AreEqual("linda" + " er oprettet i databasen", client.OpretBruger("linda", "J4566785", "Hans@gmail.com"));
-        }
-
-        [TestMethod]
-        public void Opdaterpasswordunittest()
-        {
-            Assert.AreEqual("Der gik noget galt med at finde din bruger. Prøv igen", client.OpdaterPassword("dskjfhkfhksd", "Ugsfsdfsdf"));
-        }
-
-        [TestMethod]
-        public void Opdaterpasswordunittest2()
-        {
-            Assert.AreEqual("Password er ændret", client.OpdaterPassword("Jari", "Dinmor3"));
-        }
-
-
-        [TestMethod]
-        public void Opdaterpasswordintegrationtest()
-        {
-            Assert.AreEqual("Der gik noget galt med at finde din bruger. Prøv igen", client.OpdaterPassword("dskjfhkfhksd", "Ugsfsdfsdf"));
-        }
-
-        [TestMethod]
-        public void Opdaterpasswordintegrationtest2()
-        {
-            Assert.AreEqual("Password er ændret", client.OpdaterPassword("Jari", "Dinmor3"));
-        }
-
-
-
-        /// <summary>
-        /// opdateremail
-        /// </summary>
-
-        [TestMethod]
-        public void Opdateremailintegrationtest()
-        {
-
-            //client.OpdaterEmail("Jari", "dinp67.com");
-            Assert.AreEqual("Email er forkert" + " (" + "dinp67.com" + ")", client.OpdaterEmail("Jari", "dinp67.com"));
-        }
-
-        [TestMethod]
-        public void Opdateremailunittest()
-        {
-            Assert.AreEqual("Der gik noget galt med at finde din bruger. Prøv igen", service.OpdaterEmail("simba", "s@tyu"));
-        }
-
-        //[TestMethod]
-        //public void Opdateremilunittest2()
-        //{
-        //    Assert.AreEqual("Email er ændret", service.OpdaterEmail("Jari", "sercret12@gmail.com" ) );
+        //    Assert.AreEqual("Der gik noget galt med at finde din bruger. Prøv igen", service.OpdaterEmail("simba", "s@tyu"));
         //}
 
         [TestMethod]
-        public void Opdateremailintegration1()
+        public void TestOpdaterEmailBruger() //Integrationstest (Brugeren findes ikke)
         {
-            Assert.AreEqual("Der gik noget galt med at finde din bruger. Prøv igen", client.OpdaterEmail("simba", "s@tyu"));
+            Assert.AreEqual("Der gik noget galt med at finde din bruger. Prøv igen",
+                client.OpdaterEmail("simba", "s@tyu"));
         }
 
         [TestMethod]
-        public void Opdateremilintegration2()
+        public void TestOpdaterEmail() //Integrationstest (Brugeren findes)
         {
-            Assert.AreEqual("Email er ændret", client.OpdaterEmail("Jari", "sercret12@gmail.com"));
+            Assert.AreEqual("Email er ændret", client.OpdaterEmail("Benjamin", "Belzamouri@gmail.com"));
         }
+
+        #endregion
+
+        #region TestTider
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void Tid()
+        public void TestTiderFraMax() //Unittest (Fra må ikke være større end 23)
         {
             tider.Fra = new TimeSpan(24, 00, 00);
         }
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void Tid1()
+        public void TestTiderFraNegativ() //Unittest (Fra må ikke være negativ)
         {
             tider.Fra = new TimeSpan(-1, 00, 00);
         }
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void Tid2()
+        public void TestTiderTilMax() //Unittest (Til må ikke være større end 23)
         {
             tider.Til = new TimeSpan(24, 00, 00);
         }
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void Tid3()
+        public void TestTiderTilNegativ() //Unittest (Til må ikke være negativ)
         {
             tider.Til = new TimeSpan(-1, 00, 00);
         }
-        //[TestMethod]
-        //public void Henttemperatur()
-        //{
-        //    Assert.AreEqual( 161 ,service.HentTemperatur(3,6));
-        //}
 
+        #endregion
 
-
-        //[TestMethod]
-        //public void Henttidspunktreturner()
-        //{
-        //    Assert.AreEqual(0, service.HentTidspunkt(2015, 11, 11));
-        //}
+        #region TestOpdaterTidsrum
 
         [TestMethod]
-        public void Henttidspunktretunerintegration()
+        public void TestOpdaterTidsrumMax() //Unitttest
         {
+            Assert.AreEqual("Tallet er forkert", service.OpdaterTidsrum("19:00:00", "25:00:00"));
+        }
 
+        [TestMethod]
+        public void TestOpdaterTidsrumMax1() //Unittest
+        {
+            Assert.AreEqual("Tallet er forkert", service.OpdaterTidsrum("25:00:00", "03:00:00"));
+        }
+
+        [TestMethod]
+        public void TestOpdaterTidsrumNegativ() //Unittest
+        {
+            Assert.AreEqual("Tallet er forkert", service.OpdaterTidsrum("22:00:00", "-01:00:00"));
+        }
+
+        //[TestMethod]
+        //public void TestOpdaterTidsrumMax2() //Integrationstest
+        //{
+        //    Assert.AreEqual("Tallet er forkert", client.OpdaterTidsrum("25:00:00", "03:00:00"));
+        //}
+
+        //[TestMethod]
+        //public void TestOpdaterTidsrumNegativ1() //Integrationstest
+        //{
+        //    Assert.AreEqual("Tallet er forkert", client.OpdaterTidsrum("-01:00:00", "03:00:00"));
+        //}
+
+        //[TestMethod]
+        //public void TestOpdaterTidsrumMax3() //Integrationstest
+        //{
+        //    Assert.AreEqual("Tallet er forkert", client.OpdaterTidsrum("19:00:00", "25:00:00"));
+        //}
+
+        #endregion
+
+        #region TestHentTemperatur
+
+        [TestMethod]
+        public void TestHentTemperatur() //Unittest (Antal temperature i intervallet 3-6)
+        {
+            Assert.AreEqual(178, client.HentTemperatur(3, 6));
+        }
+
+        [TestMethod]
+        public void TestHentTemperatur1() //Integrationstest (Antal temperature i intervallet 3-6)
+        {
+            Assert.AreEqual(178, client.HentTemperatur(3, 6));
+        }
+
+        #endregion
+
+        #region TestHentTidspunkt
+
+        [TestMethod]
+        public void TestHentTidspunkt() //Unittest
+        {
+            Assert.AreEqual(0, service.HentTidspunkt(2015, 11, 11));
+        }
+
+        [TestMethod]
+        public void TestHentTidspunkt1() //Integrationstest
+        {
             Assert.AreEqual(0, client.HentTidspunkt(2015, 11, 11));
         }
 
-        /// <summary>
-        /// Glemt brugernavn test
-        /// </summary>
+        #endregion
+
+        #region TestGlemtBrugernavn
 
         [TestMethod]
-        public void Glemtbrugernavn()
+        public void TestGlemtBrugernavnSnabelA() //Unittest (Email indeholder ikke "@")
         {
             Assert.AreEqual("Email er ikke gyldig (Skal indeholde @)", service.GlemtBrugernavn("jnnjij"));
         }
 
         [TestMethod]
-        public void Glemtbrugernavnunit()
+        public void TestGlemtBrugernavnEmail() //Unittest (Email findes ikke)
         {
             Assert.AreEqual("Email eksisterer ikke i databasen", service.GlemtBrugernavn("opop@fgf"));
         }
+
         [TestMethod]
-        public void Glemtbrugernavnunit2()
+        public void TestGlemtBrugernavn() //Unittest (Email findes)
         {
-            Assert.AreEqual("Brugernavn er sendt til danielwinther@hotmail.dk", service.GlemtBrugernavn("danielwinther@hotmail.dk"));
+            Assert.AreEqual("Brugernavn er sendt til danielwinther@hotmail.dk",
+                service.GlemtBrugernavn("danielwinther@hotmail.dk"));
         }
 
         [TestMethod]
-        public void Glemtbrugernavnintegration()
+        public void TestGlemtBrugernavnSnabelA1() //Integrationstest (Email indeholder ikke "@")
         {
             Assert.AreEqual("Email er ikke gyldig (Skal indeholde @)", client.GlemtBrugernavn("jnnjij"));
         }
 
         [TestMethod]
-        public void Glemtbrugernavnintegration1()
+        public void TestGlemtBrugernavnEmail1() //Integrationstest (Email findes ikke)
         {
             Assert.AreEqual("Email eksisterer ikke i databasen", client.GlemtBrugernavn("opop@fgf"));
         }
+
         [TestMethod]
-        public void Glemtbrugernavnunintegration2()
+        public void TestGlemtBrugernavn1() //Integrationstest (Email findes)
         {
-            Assert.AreEqual("Brugernavn er sendt til danielwinther@hotmail.dk", client.GlemtBrugernavn("danielwinther@hotmail.dk"));
+            Assert.AreEqual("Brugernavn er sendt til danielwinther@hotmail.dk",
+                client.GlemtBrugernavn("danielwinther@hotmail.dk"));
         }
+
+        #endregion
+
+        #region TestHentBevaegelse
+
+        [TestMethod]
+        public void TestHentBevaegelse() //Unittest
+        {
+            Assert.AreEqual(261, service.HentBevaegelser().Count());
+        }
+
+        [TestMethod]
+        public void TestHentBevaegelse1() //Integrationstest
+        {
+            Assert.AreEqual(261, client.HentBevaegelser().Count());
+        }
+
+        #endregion
+
+        #region TestLogin
+
+        [TestMethod]
+        public void TestLogin() //Integrationstest
+        {
+            string s = client.Login("Benjamin", "Secret12");
+            Assert.AreEqual("Benjamin", s);
+        }
+
+        [TestMethod]
+        public void TestLogin1() //Integrationstest
+        {
+            string s = service.Login("Homo", "Secret12");
+            Assert.AreEqual("Brugernavnet/passwordet er forkert", s);
+        }
+
+        #endregion
+
+
 
     }
 }

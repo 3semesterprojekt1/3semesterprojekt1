@@ -283,7 +283,7 @@ namespace WCFServiceWebRole1
             }
             catch (Exception)
             {
-                return "Udfyld alle felterne";
+                return "Tallet er forkert";
             }
 
         }

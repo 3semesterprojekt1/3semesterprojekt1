@@ -1,150 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:5017/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WCFServiceWebRole1.Models" />
-  <xs:element name="SletHistorik">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="id" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SletHistorikResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/WCFServiceWebRole1.Models" minOccurs="0" name="SletHistorikResult" nillable="true" type="q1:Bevaegelser" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="OpretBruger">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="brugernavn" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="OpretBrugerResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="OpretBrugerResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="OpdaterPassword">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="brugernavn" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="OpdaterPasswordResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="OpdaterPasswordResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="OpdaterEmail">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="brugernavn" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="OpdaterEmailResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="OpdaterEmailResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="Login">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="brugernavn" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="LoginResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="LoginResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="HentBevaegelser">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="HentBevaegelserResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/WCFServiceWebRole1.Models" minOccurs="0" name="HentBevaegelserResult" nillable="true" type="q2:ArrayOfBevaegelser" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="HentTemperatur">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="startInterval" type="xs:int" />
-        <xs:element minOccurs="0" name="slutInterval" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="HentTemperaturResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="HentTemperaturResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="HentTidspunkt">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="aarstal" type="xs:int" />
-        <xs:element minOccurs="0" name="maaned" type="xs:int" />
-        <xs:element minOccurs="0" name="slutdag" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="HentTidspunktResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="HentTidspunktResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GlemtPassword">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="brugernavn" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GlemtPasswordResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="GlemtPasswordResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GlemtBrugernavn">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GlemtBrugernavnResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="GlemtBrugernavnResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/WCFServiceWebRole1.Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WCFServiceWebRole1.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://ballingfirst1.cloudapp.net/Service1.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="Bevaegelser">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Dato" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Temperatur" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Tidspunkt" type="ser:duration" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Bevaegelser" nillable="true" type="tns:Bevaegelser" />
+  <xs:complexType name="ArrayOfBevaegelser">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Bevaegelser" nillable="true" type="tns:Bevaegelser" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBevaegelser" nillable="true" type="tns:ArrayOfBevaegelser" />
 </xs:schema>

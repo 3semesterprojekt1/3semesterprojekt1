@@ -74,6 +74,12 @@ namespace TestProjekt.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GlemtBrugernavn", ReplyAction="http://tempuri.org/IService1/GlemtBrugernavnResponse")]
         System.Threading.Tasks.Task<string> GlemtBrugernavnAsync(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Opdaterbevægelse", ReplyAction="http://tempuri.org/IService1/OpdaterbevægelseResponse")]
+        string Opdaterbevægelse(string fra, string til);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Opdaterbevægelse", ReplyAction="http://tempuri.org/IService1/OpdaterbevægelseResponse")]
+        System.Threading.Tasks.Task<string> OpdaterbevægelseAsync(string fra, string til);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -181,6 +187,14 @@ namespace TestProjekt.ServiceReference1 {
         
         public System.Threading.Tasks.Task<string> GlemtBrugernavnAsync(string email) {
             return base.Channel.GlemtBrugernavnAsync(email);
+        }
+        
+        public string Opdaterbevægelse(string fra, string til) {
+            return base.Channel.Opdaterbevægelse(fra, til);
+        }
+        
+        public System.Threading.Tasks.Task<string> OpdaterbevægelseAsync(string fra, string til) {
+            return base.Channel.OpdaterbevægelseAsync(fra, til);
         }
     }
 }
