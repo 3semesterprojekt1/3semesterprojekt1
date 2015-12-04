@@ -161,7 +161,7 @@ namespace WCFServiceWebRole1
                     return b1.Brugernavn;
                 }
             }
-            return "Brugeren fandtes ikke";
+            return "Brugernavnet/passwordet er forkert";
         }
 
         /// <summary>
