@@ -106,7 +106,7 @@ namespace WCFServiceWebRole1
                 {
                     try
                     {
-                        b.Password = password;
+                        b.Password = KrypterStreng(password);
                         dataContext.Brugere.AddOrUpdate(b);
                         dataContext.SaveChanges();
                         return "Password er ændret";
@@ -319,9 +319,9 @@ namespace WCFServiceWebRole1
             Task.Run((() => AktiverAlarm()));
             using (DataContext dataContext = new DataContext())
             {
-                var tid = (from q in dataContext.Tider where q.Id == 1 select q).SingleOrDefault();
                 while (true)
                 {
+                    var tid = (from q in dataContext.Tider where q.Id == 1 select q).SingleOrDefault();
                     if (AktiverSensor(DateTime.Now.TimeOfDay, tid.Fra, tid.Til))
                     {
                         //Random r = new Random();
