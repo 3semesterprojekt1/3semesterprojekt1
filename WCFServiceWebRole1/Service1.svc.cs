@@ -111,6 +111,7 @@ namespace WCFServiceWebRole1
                 {
                     try
                     {
+                        b.Password = password;
                         b.Password = KrypterStreng(password);
                         dataContext.Brugere.AddOrUpdate(b);
                         dataContext.SaveChanges();
