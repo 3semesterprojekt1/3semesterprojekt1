@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -269,19 +270,19 @@ namespace TestProjekt
         //}
 
         #endregion
-
+        
         #region TestHentTemperatur
 
         [TestMethod]
         public void TestHentTemperatur() //Unittest (Antal temperature i intervallet 3-6)
         {
-            Assert.AreEqual(177, client.HentTemperatur(3, 6));
+            Assert.AreEqual(3, client.HentTemperatur(3, 11));
         }
 
         [TestMethod]
         public void TestHentTemperatur1() //Integrationstest (Antal temperature i intervallet 3-6)
         {
-            Assert.AreEqual(177, client.HentTemperatur(3, 6));
+            Assert.AreEqual(3, client.HentTemperatur(3, 6));
         }
 
         #endregion
@@ -349,13 +350,61 @@ namespace TestProjekt
         [TestMethod]
         public void TestHentBevaegelse() //Unittest
         {
-            Assert.AreEqual(251, service.HentBevaegelser("lol", "we").Count());
+            Assert.AreEqual(3, service.HentBevaegelser("lol", "we").Count());
         }
 
         [TestMethod]
         public void TestHentBevaegelse1() //Integrationstest
         {
-            Assert.AreEqual(251, client.HentBevaegelser().Count());
+            Assert.AreEqual(3, client.HentBevaegelser().Count());
+        }
+
+        [TestMethod]
+        public void TestHentBevaegelseSorterTidspunktFaldende()
+        {
+            Bevaegelser b = service.HentBevaegelser("Tidspunkt", "faldende")[0];
+            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 04, 01), new TimeSpan(22, 45, 00), 10);
+            Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
+        }
+
+        [TestMethod]
+        public void TestHentBevaegelseSorterTidspunktStigende()
+        {
+            Bevaegelser b = service.HentBevaegelser("Tidspunkt", "stigende")[0];
+            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 02, 17), new TimeSpan(08, 22, 22), 8);
+            Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
+        }
+
+        [TestMethod]
+        public void TestHentBevaegelseSorterDatoFaldende()
+        {
+            Bevaegelser b = service.HentBevaegelser("Dato", "faldende")[0];
+            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 04, 01), new TimeSpan(22, 45, 00), 10);
+            Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
+        }
+
+        [TestMethod]
+        public void TestHentBevaegelseSorterDatoStigende()
+        {
+            Bevaegelser b = service.HentBevaegelser("Dato", "stigende")[0];
+            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 02, 17), new TimeSpan(08, 22, 22), 8);
+            Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
+        }
+
+        [TestMethod]
+        public void TestHentBevaegelseSorterTemperaturFaldende()
+        {
+            Bevaegelser b = service.HentBevaegelser("Dato", "faldende")[0];
+            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 04, 01), new TimeSpan(22, 45, 00), 10);
+            Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
+        }
+
+        [TestMethod]
+        public void TestHentBevaegelseSorterTemperaturStigende()
+        {
+            Bevaegelser b = service.HentBevaegelser("Dato", "stigende")[0];
+            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 02, 17), new TimeSpan(08, 22, 22), 8);
+            Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
         }
 
         #endregion
@@ -378,25 +427,8 @@ namespace TestProjekt
 
         #endregion
 
-        [TestMethod]
-        public void StressTest()
-        {
-            int i = 0;
-            while (i < 1000)
-            {
-                service.HentBevaegelser("s", "t");
-                //client.HentBevaegelser();
-                i++;
-            }
-            Assert.AreEqual(1000, i);
-        }
 
-        //[TestMethod]
-        //public void TestHentbevagelseSorter()
-        //{
-        //    Bevaegelser b = service.HentBevaegelser("Tidspunkt", "faldende")[0];
-        //    Assert.AreEqual();
-        //}
+       
 
     }
 }

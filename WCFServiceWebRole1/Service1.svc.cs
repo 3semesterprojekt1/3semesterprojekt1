@@ -252,7 +252,6 @@ namespace WCFServiceWebRole1
         /// <returns>int med antal bevægelser i intervallet</returns>
         public int HentTemperatur(int startInterval, int slutInterval)
         {
-            Thread.Sleep(5000);
             using (DataContext datacontext = new DataContext())
             {
                 var query = from p in datacontext.Bevaegelser
