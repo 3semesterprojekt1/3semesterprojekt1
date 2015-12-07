@@ -179,12 +179,12 @@ namespace WCFServiceWebRole1
                     case "Tidspunkt":
                         switch (faldendeEllerStigende)
                         {
-                            case "ascending":
+                            case "stigende":
                             {
                                 var query = from q in dataContext.Bevaegelser orderby q.Tidspunkt ascending select q;
                                 return query.ToList();
                             }
-                            case "descending":
+                            case "faldende":
                             {
                                 var query = from q in dataContext.Bevaegelser orderby q.Tidspunkt descending select q;
                                 return query.ToList();
@@ -196,12 +196,12 @@ namespace WCFServiceWebRole1
                     case "Dato":
                         switch (faldendeEllerStigende)
                         {
-                            case "ascending":
+                            case "stigende":
                             {
                                 var query = from q in dataContext.Bevaegelser orderby q.Dato ascending select q;
                                 return query.ToList();
                             }
-                            case "descending":
+                            case "faldende":
                             {
                                 var query = from q in dataContext.Bevaegelser orderby q.Dato descending select q;
                                 return query.ToList();
@@ -213,12 +213,12 @@ namespace WCFServiceWebRole1
                     case "Temperatur":
                         switch (faldendeEllerStigende)
                         {
-                            case "ascending":
+                            case "stigende":
                             {
                                 var query = from q in dataContext.Bevaegelser orderby q.Temperatur ascending select q;
                                 return query.ToList();
                             }
-                            case "descending":
+                            case "faldende":
                             {
                                 var query = from q in dataContext.Bevaegelser orderby q.Temperatur descending select q;
                                 return query.ToList();
