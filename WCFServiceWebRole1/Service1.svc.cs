@@ -168,16 +168,16 @@ namespace WCFServiceWebRole1
         /// Henter alle bevaegelser
         /// </summary>
         /// <param name="kolonne">Sortere på den valgte kolonne</param>
-        /// <param name="ascendingEllerDescending"></param>
+        /// <param name="faldendeEllerStigende"></param>
         /// <returns>En liste med alle bevægelser</returns>
-        public List<Bevaegelser> HentBevaegelser(string kolonne, string ascendingEllerDescending)
+        public List<Bevaegelser> HentBevaegelser(string kolonne, string faldendeEllerStigende)
         {
             using (DataContext dataContext = new DataContext())
             {
                 switch (kolonne)
                 {
                     case "Tidspunkt":
-                        switch (ascendingEllerDescending)
+                        switch (faldendeEllerStigende)
                         {
                             case "ascending":
                             {
@@ -194,7 +194,7 @@ namespace WCFServiceWebRole1
                                 return queryDefault.ToList();
                         }
                     case "Dato":
-                        switch (ascendingEllerDescending)
+                        switch (faldendeEllerStigende)
                         {
                             case "ascending":
                             {
@@ -211,7 +211,7 @@ namespace WCFServiceWebRole1
                                 return queryDefault.ToList();
                         }
                     case "Temperatur":
-                        switch (ascendingEllerDescending)
+                        switch (faldendeEllerStigende)
                         {
                             case "ascending":
                             {
