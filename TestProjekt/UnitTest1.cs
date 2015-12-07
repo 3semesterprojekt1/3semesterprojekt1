@@ -275,13 +275,13 @@ namespace TestProjekt
         [TestMethod]
         public void TestHentTemperatur() //Unittest (Antal temperature i intervallet 3-6)
         {
-            Assert.AreEqual(178, client.HentTemperatur(3, 6));
+            Assert.AreEqual(177, client.HentTemperatur(3, 6));
         }
 
         [TestMethod]
         public void TestHentTemperatur1() //Integrationstest (Antal temperature i intervallet 3-6)
         {
-            Assert.AreEqual(178, client.HentTemperatur(3, 6));
+            Assert.AreEqual(177, client.HentTemperatur(3, 6));
         }
 
         #endregion
@@ -349,13 +349,13 @@ namespace TestProjekt
         [TestMethod]
         public void TestHentBevaegelse() //Unittest
         {
-            Assert.AreEqual(253, service.HentBevaegelser("lol", "we").Count());
+            Assert.AreEqual(251, service.HentBevaegelser("lol", "we").Count());
         }
 
         [TestMethod]
         public void TestHentBevaegelse1() //Integrationstest
         {
-            Assert.AreEqual(261, client.HentBevaegelser().Count());
+            Assert.AreEqual(251, client.HentBevaegelser().Count());
         }
 
         #endregion
@@ -378,7 +378,25 @@ namespace TestProjekt
 
         #endregion
 
+        [TestMethod]
+        public void StressTest()
+        {
+            int i = 0;
+            while (i < 1000)
+            {
+                service.HentBevaegelser("s", "t");
+                //client.HentBevaegelser();
+                i++;
+            }
+            Assert.AreEqual(1000, i);
+        }
 
+        //[TestMethod]
+        //public void TestHentbevagelseSorter()
+        //{
+        //    Bevaegelser b = service.HentBevaegelser("Tidspunkt", "faldende")[0];
+        //    Assert.AreEqual();
+        //}
 
     }
 }
