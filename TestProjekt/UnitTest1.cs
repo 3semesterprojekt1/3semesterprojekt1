@@ -349,7 +349,7 @@ namespace TestProjekt
         [TestMethod]
         public void TestHentBevaegelse() //Unittest
         {
-            Assert.AreEqual(261, service.HentBevaegelser().Count());
+            Assert.AreEqual(253, service.HentBevaegelser("lol", "we").Count());
         }
 
         [TestMethod]

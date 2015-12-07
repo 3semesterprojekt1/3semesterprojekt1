@@ -167,20 +167,22 @@ namespace WCFServiceWebRole1
         /// <summary>
         /// Henter alle bevaegelser
         /// </summary>
+        /// <param name="kolonne">Sortere på den valgte kolonne</param>
+        /// <param name="ascendingEllerDescending"></param>
         /// <returns>En liste med alle bevægelser</returns>
-        public List<Bevaegelser> HentBevaegelser(string kolonne, string ascendingOrDescending)
+        public List<Bevaegelser> HentBevaegelser(string kolonne, string ascendingEllerDescending)
         {
             using (DataContext dataContext = new DataContext())
             {
                 switch (kolonne)
                 {
                     case "Tidspunkt":
-                        switch (ascendingOrDescending)
+                        switch (ascendingEllerDescending)
                         {
                             case "ascending":
                             {
                                 var query = from q in dataContext.Bevaegelser orderby q.Tidspunkt ascending select q;
-                                return query.ToList(); 
+                                return query.ToList();
                             }
                             case "descending":
                             {
@@ -192,7 +194,7 @@ namespace WCFServiceWebRole1
                                 return queryDefault.ToList();
                         }
                     case "Dato":
-                        switch (ascendingOrDescending)
+                        switch (ascendingEllerDescending)
                         {
                             case "ascending":
                             {
@@ -209,7 +211,7 @@ namespace WCFServiceWebRole1
                                 return queryDefault.ToList();
                         }
                     case "Temperatur":
-                        switch (ascendingOrDescending)
+                        switch (ascendingEllerDescending)
                         {
                             case "ascending":
                             {
