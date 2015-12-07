@@ -45,6 +45,11 @@ namespace WCFServiceWebRole1
             }
         }
 
+        /// <summary>
+        /// Sletter et bevægelses element med det pågældende id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>bevægelsen med id(id)</returns>
         public Bevaegelser SletHistorik(int id)
         {
             using (DataContext dataContext = new DataContext())
@@ -92,7 +97,7 @@ namespace WCFServiceWebRole1
         }
 
         /// <summary>
-        /// Opdatere den pågældende brugers password til det skrevne password
+        /// Opdaterer den pågældende brugers password til det skrevne password
         /// </summary>
         /// <param name="brugernavn"></param>
         /// <param name="password"></param>
@@ -122,7 +127,7 @@ namespace WCFServiceWebRole1
         }
 
         /// <summary>
-        /// Opdatere den pågældende brugers email til den skrevne email
+        /// Opdaterer den pågældende brugers email til den skrevne email
         /// </summary>
         /// <param name="brugernavn"></param>
         /// <param name="email"></param>
@@ -150,6 +155,12 @@ namespace WCFServiceWebRole1
             }
         }
 
+        /// <summary>
+        /// Tjekker på brugerens login
+        /// </summary>
+        /// <param name="brugernavn"></param>
+        /// <param name="password"></param>
+        /// <returns>string med resultat</returns>
         public string Login(string brugernavn, string password)
         {
             Brugere b1 = FindBruger(brugernavn);
@@ -238,7 +249,7 @@ namespace WCFServiceWebRole1
         /// </summary>
         /// <param name="startInterval"></param>
         /// <param name="slutInterval"></param>
-        /// <returns></returns>
+        /// <returns>int med antal bevægelser i intervallet</returns>
         public int HentTemperatur(int startInterval, int slutInterval)
         {
             using (DataContext datacontext = new DataContext())
@@ -256,7 +267,7 @@ namespace WCFServiceWebRole1
         /// <param name="aarstal"></param>
         /// <param name="maaned"></param>
         /// <param name="slutdag"></param>
-        /// <returns>int med antal bevægelser</returns>
+        /// <returns>int med antal bevægelser i intervallet</returns>
         public int HentTidspunkt(int aarstal, int maaned, int slutdag)
         {
             try
@@ -287,7 +298,7 @@ namespace WCFServiceWebRole1
         /// Sender nyt password e-mail
         /// </summary>
         /// <param name="brugernavn"></param>
-        /// <returns></returns>
+        /// <returns>string med resultat</returns>
         public string GlemtPassword(string brugernavn)
         {
             Brugere b = FindBruger(brugernavn);
@@ -321,6 +332,12 @@ namespace WCFServiceWebRole1
             return "Email eksisterer ikke i databasen";
         }
 
+        /// <summary>
+        /// Opdaterer tidsrummet hvori sensoren er aktiv
+        /// </summary>
+        /// <param name="fra"></param>
+        /// <param name="til"></param>
+        /// <returns>string med resultat</returns>
         public string OpdaterTidsrum(string fra, string til)
         {
             try
@@ -507,7 +524,6 @@ namespace WCFServiceWebRole1
                 return "P" + hash;
             }
         }
-
         private string Md5Hash(MD5 md5Hash, string input)
         {
             byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
