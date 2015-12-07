@@ -168,12 +168,67 @@ namespace WCFServiceWebRole1
         /// Henter alle bevaegelser
         /// </summary>
         /// <returns>En liste med alle bevægelser</returns>
-        public List<Bevaegelser> HentBevaegelser()
+        public List<Bevaegelser> HentBevaegelser(string kolonne, string ascendingOrDescending)
         {
             using (DataContext dataContext = new DataContext())
             {
-                var query = from q in dataContext.Bevaegelser orderby q.Dato descending, q.Tidspunkt descending select q;
-                return query.ToList();
+                switch (kolonne)
+                {
+                    case "Tidspunkt":
+                        switch (ascendingOrDescending)
+                        {
+                            case "ascending":
+                            {
+                                var query = from q in dataContext.Bevaegelser orderby q.Tidspunkt ascending select q;
+                                return query.ToList(); 
+                            }
+                            case "descending":
+                            {
+                                var query = from q in dataContext.Bevaegelser orderby q.Tidspunkt descending select q;
+                                return query.ToList();
+                            }
+                            default:
+                                var queryDefault = from q in dataContext.Bevaegelser orderby q.Dato descending orderby q.Tidspunkt descending select q;
+                                return queryDefault.ToList();
+                        }
+                    case "Dato":
+                        switch (ascendingOrDescending)
+                        {
+                            case "ascending":
+                            {
+                                var query = from q in dataContext.Bevaegelser orderby q.Dato ascending select q;
+                                return query.ToList();
+                            }
+                            case "descending":
+                            {
+                                var query = from q in dataContext.Bevaegelser orderby q.Dato descending select q;
+                                return query.ToList();
+                            }
+                            default:
+                                var queryDefault = from q in dataContext.Bevaegelser orderby q.Dato descending orderby q.Tidspunkt descending select q;
+                                return queryDefault.ToList();
+                        }
+                    case "Temperatur":
+                        switch (ascendingOrDescending)
+                        {
+                            case "ascending":
+                            {
+                                var query = from q in dataContext.Bevaegelser orderby q.Temperatur ascending select q;
+                                return query.ToList();
+                            }
+                            case "descending":
+                            {
+                                var query = from q in dataContext.Bevaegelser orderby q.Temperatur descending select q;
+                                return query.ToList();
+                            }
+                            default:
+                                var queryDefault = from q in dataContext.Bevaegelser orderby q.Dato descending orderby q.Tidspunkt descending select q;
+                                return queryDefault.ToList();
+                        }
+                    default:
+                        var queryDefault1 = from q in dataContext.Bevaegelser orderby q.Dato descending orderby q.Tidspunkt descending select q;
+                        return queryDefault1.ToList();
+                }
             }
         }
         /// <summary>

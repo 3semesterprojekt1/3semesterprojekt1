@@ -25,7 +25,7 @@ namespace WCFServiceWebRole1
         string Login(string brugernavn, string password);
 
         [OperationContract]
-        List<Bevaegelser> HentBevaegelser();
+        List<Bevaegelser> HentBevaegelser(string kolonne, string ascendingOrDescending);
             
         [OperationContract]
         int HentTemperatur(int startInterval, int slutInterval);
