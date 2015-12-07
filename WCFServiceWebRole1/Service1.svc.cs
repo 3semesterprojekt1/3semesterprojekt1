@@ -218,7 +218,7 @@ namespace WCFServiceWebRole1
                                 return query.ToList();
                             }
                             default:
-                                var queryDefault = from q in dataContext.Bevaegelser orderby q.Dato descending orderby q.Tidspunkt descending select q;
+                                var queryDefault = from q in dataContext.Bevaegelser orderby q.Dato descending orderby q.Dato descending select q;
                                 return queryDefault.ToList();
                         }
                     case "Temperatur":
@@ -235,7 +235,7 @@ namespace WCFServiceWebRole1
                                 return query.ToList();
                             }
                             default:
-                                var queryDefault = from q in dataContext.Bevaegelser orderby q.Dato descending orderby q.Tidspunkt descending select q;
+                                var queryDefault = from q in dataContext.Bevaegelser orderby q.Dato descending orderby q.Temperatur descending select q;
                                 return queryDefault.ToList();
                         }
                     default:
