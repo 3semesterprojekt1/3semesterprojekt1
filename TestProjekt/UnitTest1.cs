@@ -483,7 +483,7 @@ namespace TestProjekt
         [TestMethod]
         public void TestLogin1() //Integrationstest
         {
-            string s = service.Login("Homo", "Secret12");
+            string s = service.Login("Michael", "Secret12");
             Assert.AreEqual("Brugernavnet/passwordet er forkert", s);
         }
 

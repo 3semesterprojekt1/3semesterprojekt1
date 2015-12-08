@@ -33,6 +33,9 @@ namespace WCFServiceWebRole1
 
         public Service1()
         {
+            try
+            {
+
             if (_client == null)
             {
                 _client = new UdpClient(Port) { EnableBroadcast = true };
@@ -44,6 +47,11 @@ namespace WCFServiceWebRole1
             if (_ta == null)
             {
                 _ta = Task.Run((() => SensorLoop()));
+            }
+            }
+            catch (Exception)
+            {
+
             }
         }
 
