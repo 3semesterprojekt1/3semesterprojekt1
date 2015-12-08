@@ -26,8 +26,8 @@ namespace SeleniumProjekt
 
         public static void StressTest(IWebDriver webDriver)
         {
-            Task[] tasks = new Task[10];
-            for (int i = 0; i < 10; i++)
+            Task[] tasks = new Task[100];
+            for (int i = 0; i < 100; i++)
             {
                 tasks[i] = Task.Factory.StartNew(() => webDriver.Navigate().GoToUrl("http://localhost/3semesterprojekt/historik/dato/faldende"));
             }
