@@ -266,3 +266,8 @@ C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\SemesterProjektWebServi
 C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\SemesterProjektWebService\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\Microsoft.Data.OData.resources.dll
 C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\SemesterProjektWebService\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\Microsoft.Data.Services.Client.resources.dll
 C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\SemesterProjektWebService\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\System.Spatial.resources.dll
+C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\SemesterProjektWebService\obj\Debug\WCFServiceWebRole1\bin\chromedriver.exe
+C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\SemesterProjektWebService\obj\Debug\WCFServiceWebRole1\bin\phantomjs-license.txt
+C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\SemesterProjektWebService\obj\Debug\WCFServiceWebRole1\bin\phantomjs.exe
+C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\SemesterProjektWebService\obj\Debug\WCFServiceWebRole1\bin\WebDriver.dll
+C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\SemesterProjektWebService\obj\Debug\WCFServiceWebRole1\bin\WebDriver.xml

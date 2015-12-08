@@ -266,3 +266,8 @@ C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\WCFServiceWebRole1\bin\
 C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\WCFServiceWebRole1\obj\Debug\WCFServiceWebRole1.csprojResolveAssemblyReference.cache
 C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\WCFServiceWebRole1\obj\Debug\WCFServiceWebRole1.dll
 C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\WCFServiceWebRole1\obj\Debug\WCFServiceWebRole1.pdb
+C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\WCFServiceWebRole1\bin\phantomjs.exe
+C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\WCFServiceWebRole1\bin\chromedriver.exe
+C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\WCFServiceWebRole1\bin\phantomjs-license.txt
+C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\WCFServiceWebRole1\bin\WebDriver.dll
+C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\WCFServiceWebRole1\bin\WebDriver.xml
