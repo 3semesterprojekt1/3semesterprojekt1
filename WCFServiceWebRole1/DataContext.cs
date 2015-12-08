@@ -1,13 +1,16 @@
 using WCFServiceWebRole1.Models;
-using System.Data.Entity;
 
 namespace WCFServiceWebRole1
 {
+    using System;
+    using System.Data.Entity;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
 
-    public class DataContext : DbContext
+    public partial class DataContext : DbContext
     {
         public DataContext()
-            : base("name=DataContext6")
+            : base("name=DataContext")
         {
             Configuration.ProxyCreationEnabled = false;
         }

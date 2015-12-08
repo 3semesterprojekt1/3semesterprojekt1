@@ -364,6 +364,38 @@ namespace WCFServiceWebRole1
 
         }
 
+        /// <summary>
+        /// Opdaterer tiden hvori sensoren sover efter måling
+        /// </summary>
+        /// <param name="minutAntal"></param>
+        /// <returns>string med resultat</returns>
+        public string OpdaterTidEfterMaaling(int minutAntal)
+        {
+            int milisekundAntal = minutAntal*60000;
+            try
+            {
+                using (DataContext dataContext = new DataContext())
+                {
+                    Tider tid = dataContext.Tider.FirstOrDefault(t => t.Id == 1);
+                    if (tid != null)
+                    {
+                        tid.SoveTidEfterMaaling = milisekundAntal;
+                        dataContext.Tider.AddOrUpdate(tid);
+                        dataContext.SaveChanges();
+                        return "Måleren sover nu i " + (minutAntal) + " minutter efter at den har målt";
+                    }
+                    else
+                    {
+                        return "Der gik noget galt. Tiden kunne ikke findes";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
         private void SendEmail(string modtager, string emne, string besked, string uniktIndhold = null)
         {
             // Emailoprettelse

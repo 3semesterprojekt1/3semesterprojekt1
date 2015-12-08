@@ -42,7 +42,13 @@ namespace WCFServiceWebRole1
 
         [OperationContract]
         string OpdaterTidsrum(string fra, string til);
+
         [OperationContract]
         Brugere FindBruger(string brugernavn = null, int id = 0, string email = null);
+
+        [OperationContract]
+        string OpdaterTidEfterMaaling(int minutAntal);
+
+
     }
 }

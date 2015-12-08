@@ -133,8 +133,8 @@
     <Content Include="Service1.svc" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Bevaegelser.cs" />
     <Compile Include="DataContext.cs" />
+    <Compile Include="Models\Bevaegelser.cs" />
     <Compile Include="Models\Brugere.cs" />
     <Compile Include="Service References\VejrService\Reference.cs">
       <AutoGen>True</AutoGen>

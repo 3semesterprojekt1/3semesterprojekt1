@@ -1,16 +1,21 @@
-using System;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
-using System.Web.WebSockets;
+using System.Web.UI.WebControls;
 
 namespace WCFServiceWebRole1.Models
 {
-    [DataContract]
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
     [Table("Tider")]
-    public class Tider
+    public partial class Tider
     {
         private TimeSpan _fra;
         private TimeSpan _til;
+        private int _soveTidEfterMaaling;
+        private int _soveTidEfterAlarmering;
 
         [DataMember]
         public int Id { get; set; }
@@ -35,6 +40,30 @@ namespace WCFServiceWebRole1.Models
             }
 
         }
+
+        public void CheckSoveTidEfterMaaling(int antalMilisekunder)
+        {
+            if (antalMilisekunder <= 0)
+            {
+                throw new ArgumentException("Værdien skal være større end 0");
+            }
+            if (antalMilisekunder > 86400000) // 86400000 = 24 timer i milisekunder
+            {
+                throw new ArgumentException("Værdien må ikke være større end 24 timer (1440 minutter)");
+            }
+        }
+
+        public void CheckSoveTidEfterAlarmering(int antalMilisekunder)
+        {
+            if (antalMilisekunder <= 0)
+            {
+                throw new ArgumentException("Værdien skal være større end 0");
+            }
+            if (antalMilisekunder > 86400000) // 86400000 = 24 timer i milisekunder
+            {
+                throw new ArgumentException("Værdien må ikke være større end 24 timer (1440 minutter)");
+            }
+        }
         [DataMember]
         public TimeSpan Fra
         {
@@ -54,6 +83,28 @@ namespace WCFServiceWebRole1.Models
             {
                 Checktil(value.ToString());
                 _til = value;
+            }
+        }
+
+        [DataMember]
+        public int SoveTidEfterMaaling
+        {
+            get { return _soveTidEfterMaaling; }
+            set
+            {
+                CheckSoveTidEfterMaaling(value);
+                _soveTidEfterMaaling = value;
+            }
+        }
+
+        [DataMember]
+        public int SoveTidEfterAlarmering
+        {
+            get { return _soveTidEfterAlarmering; }
+            set
+            {
+                CheckSoveTidEfterAlarmering(value);
+                _soveTidEfterAlarmering = value;
             }
         }
     }

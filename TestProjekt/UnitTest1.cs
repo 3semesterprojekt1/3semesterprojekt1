@@ -229,6 +229,12 @@ namespace TestProjekt
             tider.Til = new TimeSpan(-1, 00, 00);
         }
 
+        [TestMethod]
+        public void TestSoveTidEfterMaalingNul()
+        {
+            Assert.AreEqual("Værdien skal være større end 0", service.OpdaterTidEfterMaaling(-5));
+        }
+
         #endregion
 
         #region TestOpdaterTidsrum
