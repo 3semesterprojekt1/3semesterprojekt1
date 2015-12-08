@@ -12,6 +12,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
+using OpenQA.Selenium;
+using OpenQA.Selenium.PhantomJS;
 using SendGrid;
 using WCFServiceWebRole1.Models;
 
@@ -406,7 +408,7 @@ namespace WCFServiceWebRole1
                         tid.SoveTidEfterAlarmering = milisekundAntal;
                         dataContext.Tider.AddOrUpdate(tid);
                         dataContext.SaveChanges();
-                        return "Alarmen sover nu i " + (minutAntal) + " efter den er gået af";
+                        return "Alarmen sover nu i " + (minutAntal) + " minutter efter den er gået af";
                     }
                     return "Der gik noget galt. Tiden kunne ikke findes";
                 }
@@ -416,6 +418,31 @@ namespace WCFServiceWebRole1
 
                 return ex.Message;
             }
+        }
+
+        public List<Politistatistik> ScrapeStatistik()
+        {
+            List<Politistatistik> politistatistik = new List<Politistatistik>();
+            int aarsTal = 2007;
+            IWebDriver webDriver = new PhantomJSDriver();
+
+            webDriver.Navigate().GoToUrl("http://www.politistatistik.dk/parameter.aspx?id=27");
+
+            webDriver.FindElement(By.XPath("//*[@id='geo00']/optgroup/option[8]")).Click();
+            webDriver.FindElement(By.XPath("//*[@id='kriminalitet01']/optgroup[2]/option[5]")).Click();
+            webDriver.FindElement(By.XPath("//*[@id='rightCloBaggr']/div[5]/div[3]/div[2]/input")).Click();
+            foreach (var aar in webDriver.FindElements(By.XPath("//*[@name='periodeYear']")))
+            {
+                aar.Click();
+            }
+            webDriver.FindElement(By.XPath("//*[@id='rightCol']/div[2]/div/div[3]/img")).Click();
+            webDriver.SwitchTo().Window(webDriver.WindowHandles.Last());
+
+            foreach (var item in webDriver.FindElements(By.ClassName("dataitem")))
+            {
+                politistatistik.Add(new Politistatistik(aarsTal++, item.Text));
+            }
+            return politistatistik.ToList();
         }
 
 
