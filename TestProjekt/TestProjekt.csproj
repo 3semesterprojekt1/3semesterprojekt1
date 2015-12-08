@@ -83,6 +83,8 @@
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\WCFServiceWebRole1.Models.Bevaegelser.datasource" />
+    <None Include="Properties\DataSources\WCFServiceWebRole1.Models.Brugere.datasource" />
+    <None Include="Properties\DataSources\WCFServiceWebRole1.Models.Politistatistik.datasource" />
     <None Include="Service References\ServiceReference1\Service1.wsdl" />
     <None Include="Service References\ServiceReference1\Service1.xsd">
       <SubType>Designer</SubType>

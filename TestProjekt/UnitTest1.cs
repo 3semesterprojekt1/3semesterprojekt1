@@ -89,7 +89,7 @@ namespace TestProjekt
         {
             Random r = new Random();
             bool actual = false;
-            Bevaegelser b1 = service.SletHistorik(r.Next(350, 530));
+            Bevaegelser b1 = service.SletHistorik(66);
             if (b1 != null)
             {
                 actual = true;
@@ -165,7 +165,7 @@ namespace TestProjekt
         [TestMethod]
         public void TestOpdaterPassword2() //Integrationstest (Brugernavn der findes)
         {
-            Assert.AreEqual("Password er ændret", client.OpdaterPassword("Benjamin", "P98dfa50eee50910cb49bb06e65230e7d"));
+            Assert.AreEqual("Password er ændret", client.OpdaterPassword("Benjamin", "Secret12"));
         }
 
         #endregion
@@ -326,7 +326,7 @@ namespace TestProjekt
         [TestMethod]
         public void TestOpdaterTidEfterAlarmering()
         {
-            Assert.AreEqual("Alarmen sover nu i " + (60) + " efter den er gået af",
+            Assert.AreEqual("Alarmen sover nu i " + (60) + " minutter efter den er gået af",
                 service.OpdaterTidEfterAlarmering(60));
         }
 
@@ -344,7 +344,7 @@ namespace TestProjekt
         [TestMethod]
         public void TestHentTemperatur1() //Integrationstest (Antal temperature i intervallet 3-6)
         {
-            Assert.AreEqual(3, client.HentTemperatur(3, 6));
+            Assert.AreEqual(3, client.HentTemperatur(3, 11));
         }
 
         #endregion
@@ -418,7 +418,7 @@ namespace TestProjekt
         [TestMethod]
         public void TestHentBevaegelse1() //Integrationstest
         {
-            Assert.AreEqual(3, client.HentBevaegelser().Count());
+            Assert.AreEqual(3, client.HentBevaegelser("lol","we").Count());
         }
 
         [TestMethod]

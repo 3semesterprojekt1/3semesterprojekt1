@@ -67,11 +67,35 @@
   <wsdl:message name="IService1_GlemtBrugernavn_OutputMessage">
     <wsdl:part name="parameters" element="tns:GlemtBrugernavnResponse" />
   </wsdl:message>
-  <wsdl:message name="IService1_Opdaterbevægelse_InputMessage">
-    <wsdl:part name="parameters" element="tns:Opdaterbevægelse" />
+  <wsdl:message name="IService1_OpdaterTidsrum_InputMessage">
+    <wsdl:part name="parameters" element="tns:OpdaterTidsrum" />
   </wsdl:message>
-  <wsdl:message name="IService1_Opdaterbevægelse_OutputMessage">
-    <wsdl:part name="parameters" element="tns:OpdaterbevægelseResponse" />
+  <wsdl:message name="IService1_OpdaterTidsrum_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OpdaterTidsrumResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_FindBruger_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindBruger" />
+  </wsdl:message>
+  <wsdl:message name="IService1_FindBruger_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindBrugerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_OpdaterTidEfterMaaling_InputMessage">
+    <wsdl:part name="parameters" element="tns:OpdaterTidEfterMaaling" />
+  </wsdl:message>
+  <wsdl:message name="IService1_OpdaterTidEfterMaaling_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OpdaterTidEfterMaalingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_OpdaterTidEfterAlarmering_InputMessage">
+    <wsdl:part name="parameters" element="tns:OpdaterTidEfterAlarmering" />
+  </wsdl:message>
+  <wsdl:message name="IService1_OpdaterTidEfterAlarmering_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OpdaterTidEfterAlarmeringResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ScrapeStatistik_InputMessage">
+    <wsdl:part name="parameters" element="tns:ScrapeStatistik" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ScrapeStatistik_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ScrapeStatistikResponse" />
   </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="SletHistorik">
@@ -114,9 +138,25 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GlemtBrugernavn" message="tns:IService1_GlemtBrugernavn_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GlemtBrugernavnResponse" message="tns:IService1_GlemtBrugernavn_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Opdaterbevægelse">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService1/Opdaterbevægelse" message="tns:IService1_Opdaterbevægelse_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService1/OpdaterbevægelseResponse" message="tns:IService1_Opdaterbevægelse_OutputMessage" />
+    <wsdl:operation name="OpdaterTidsrum">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/OpdaterTidsrum" message="tns:IService1_OpdaterTidsrum_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/OpdaterTidsrumResponse" message="tns:IService1_OpdaterTidsrum_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindBruger">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/FindBruger" message="tns:IService1_FindBruger_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/FindBrugerResponse" message="tns:IService1_FindBruger_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OpdaterTidEfterMaaling">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/OpdaterTidEfterMaaling" message="tns:IService1_OpdaterTidEfterMaaling_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/OpdaterTidEfterMaalingResponse" message="tns:IService1_OpdaterTidEfterMaaling_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OpdaterTidEfterAlarmering">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/OpdaterTidEfterAlarmering" message="tns:IService1_OpdaterTidEfterAlarmering_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/OpdaterTidEfterAlarmeringResponse" message="tns:IService1_OpdaterTidEfterAlarmering_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ScrapeStatistik">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/ScrapeStatistik" message="tns:IService1_ScrapeStatistik_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/ScrapeStatistikResponse" message="tns:IService1_ScrapeStatistik_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -211,8 +251,44 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Opdaterbevægelse">
-      <soap:operation soapAction="http://tempuri.org/IService1/Opdaterbevægelse" style="document" />
+    <wsdl:operation name="OpdaterTidsrum">
+      <soap:operation soapAction="http://tempuri.org/IService1/OpdaterTidsrum" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindBruger">
+      <soap:operation soapAction="http://tempuri.org/IService1/FindBruger" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpdaterTidEfterMaaling">
+      <soap:operation soapAction="http://tempuri.org/IService1/OpdaterTidEfterMaaling" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpdaterTidEfterAlarmering">
+      <soap:operation soapAction="http://tempuri.org/IService1/OpdaterTidEfterAlarmering" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ScrapeStatistik">
+      <soap:operation soapAction="http://tempuri.org/IService1/ScrapeStatistik" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

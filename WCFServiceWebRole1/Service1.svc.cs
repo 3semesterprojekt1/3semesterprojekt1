@@ -35,23 +35,21 @@ namespace WCFServiceWebRole1
         {
             try
             {
-
-            if (_client == null)
-            {
-                _client = new UdpClient(Port) { EnableBroadcast = true };
-            }
-            if (_ipAddress == null)
-            {
-                _ipAddress = new IPEndPoint(IPAddress.Any, Port);
-            }
-            if (_ta == null)
-            {
-                _ta = Task.Run((() => SensorLoop()));
-            }
+                if (_client == null)
+                {
+                    _client = new UdpClient(Port) {EnableBroadcast = true};
+                }
+                if (_ipAddress == null)
+                {
+                    _ipAddress = new IPEndPoint(IPAddress.Any, Port);
+                }
+                if (_ta == null)
+                {
+                    _ta = Task.Run((() => SensorLoop()));
+                }
             }
             catch (Exception)
             {
-
             }
         }
 

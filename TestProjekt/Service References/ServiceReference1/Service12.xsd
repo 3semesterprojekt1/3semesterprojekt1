@@ -16,4 +16,25 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfBevaegelser" nillable="true" type="tns:ArrayOfBevaegelser" />
+  <xs:complexType name="Brugere">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Brugernavn" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Brugere" nillable="true" type="tns:Brugere" />
+  <xs:complexType name="ArrayOfPolitistatistik">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Politistatistik" nillable="true" type="tns:Politistatistik" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPolitistatistik" nillable="true" type="tns:ArrayOfPolitistatistik" />
+  <xs:complexType name="Politistatistik">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Aar" type="xs:int" />
+      <xs:element minOccurs="0" name="Indbrud" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Politistatistik" nillable="true" type="tns:Politistatistik" />
 </xs:schema>

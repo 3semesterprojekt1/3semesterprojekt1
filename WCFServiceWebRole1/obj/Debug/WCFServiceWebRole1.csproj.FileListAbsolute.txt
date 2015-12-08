@@ -270,3 +270,4 @@ C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\WCFServiceWebRole1\bin\zh
 C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\WCFServiceWebRole1\bin\zh-Hant\System.Spatial.resources.dll
 C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\WCFServiceWebRole1\obj\Debug\WCFServiceWebRole1.dll
 C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\WCFServiceWebRole1\obj\Debug\WCFServiceWebRole1.pdb
+C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\WCFServiceWebRole1\obj\Debug\WCFServiceWebRole1.csprojResolveAssemblyReference.cache

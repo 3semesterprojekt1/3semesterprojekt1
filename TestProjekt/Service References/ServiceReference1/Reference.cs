@@ -46,10 +46,10 @@ namespace TestProjekt.ServiceReference1 {
         System.Threading.Tasks.Task<string> LoginAsync(string brugernavn, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/HentBevaegelser", ReplyAction="http://tempuri.org/IService1/HentBevaegelserResponse")]
-        WCFServiceWebRole1.Models.Bevaegelser[] HentBevaegelser();
+        WCFServiceWebRole1.Models.Bevaegelser[] HentBevaegelser(string kolonne, string faldendeEllerStigende);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/HentBevaegelser", ReplyAction="http://tempuri.org/IService1/HentBevaegelserResponse")]
-        System.Threading.Tasks.Task<WCFServiceWebRole1.Models.Bevaegelser[]> HentBevaegelserAsync();
+        System.Threading.Tasks.Task<WCFServiceWebRole1.Models.Bevaegelser[]> HentBevaegelserAsync(string kolonne, string faldendeEllerStigende);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/HentTemperatur", ReplyAction="http://tempuri.org/IService1/HentTemperaturResponse")]
         int HentTemperatur(int startInterval, int slutInterval);
@@ -75,11 +75,35 @@ namespace TestProjekt.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GlemtBrugernavn", ReplyAction="http://tempuri.org/IService1/GlemtBrugernavnResponse")]
         System.Threading.Tasks.Task<string> GlemtBrugernavnAsync(string email);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Opdaterbevægelse", ReplyAction="http://tempuri.org/IService1/OpdaterbevægelseResponse")]
-        string Opdaterbevægelse(string fra, string til);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/OpdaterTidsrum", ReplyAction="http://tempuri.org/IService1/OpdaterTidsrumResponse")]
+        string OpdaterTidsrum(string fra, string til);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Opdaterbevægelse", ReplyAction="http://tempuri.org/IService1/OpdaterbevægelseResponse")]
-        System.Threading.Tasks.Task<string> OpdaterbevægelseAsync(string fra, string til);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/OpdaterTidsrum", ReplyAction="http://tempuri.org/IService1/OpdaterTidsrumResponse")]
+        System.Threading.Tasks.Task<string> OpdaterTidsrumAsync(string fra, string til);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/FindBruger", ReplyAction="http://tempuri.org/IService1/FindBrugerResponse")]
+        WCFServiceWebRole1.Models.Brugere FindBruger(string brugernavn, int id, string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/FindBruger", ReplyAction="http://tempuri.org/IService1/FindBrugerResponse")]
+        System.Threading.Tasks.Task<WCFServiceWebRole1.Models.Brugere> FindBrugerAsync(string brugernavn, int id, string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/OpdaterTidEfterMaaling", ReplyAction="http://tempuri.org/IService1/OpdaterTidEfterMaalingResponse")]
+        string OpdaterTidEfterMaaling(int minutAntal);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/OpdaterTidEfterMaaling", ReplyAction="http://tempuri.org/IService1/OpdaterTidEfterMaalingResponse")]
+        System.Threading.Tasks.Task<string> OpdaterTidEfterMaalingAsync(int minutAntal);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/OpdaterTidEfterAlarmering", ReplyAction="http://tempuri.org/IService1/OpdaterTidEfterAlarmeringResponse")]
+        string OpdaterTidEfterAlarmering(int minutAntal);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/OpdaterTidEfterAlarmering", ReplyAction="http://tempuri.org/IService1/OpdaterTidEfterAlarmeringResponse")]
+        System.Threading.Tasks.Task<string> OpdaterTidEfterAlarmeringAsync(int minutAntal);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ScrapeStatistik", ReplyAction="http://tempuri.org/IService1/ScrapeStatistikResponse")]
+        WCFServiceWebRole1.Models.Politistatistik[] ScrapeStatistik();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ScrapeStatistik", ReplyAction="http://tempuri.org/IService1/ScrapeStatistikResponse")]
+        System.Threading.Tasks.Task<WCFServiceWebRole1.Models.Politistatistik[]> ScrapeStatistikAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -149,12 +173,12 @@ namespace TestProjekt.ServiceReference1 {
             return base.Channel.LoginAsync(brugernavn, password);
         }
         
-        public WCFServiceWebRole1.Models.Bevaegelser[] HentBevaegelser() {
-            return base.Channel.HentBevaegelser();
+        public WCFServiceWebRole1.Models.Bevaegelser[] HentBevaegelser(string kolonne, string faldendeEllerStigende) {
+            return base.Channel.HentBevaegelser(kolonne, faldendeEllerStigende);
         }
         
-        public System.Threading.Tasks.Task<WCFServiceWebRole1.Models.Bevaegelser[]> HentBevaegelserAsync() {
-            return base.Channel.HentBevaegelserAsync();
+        public System.Threading.Tasks.Task<WCFServiceWebRole1.Models.Bevaegelser[]> HentBevaegelserAsync(string kolonne, string faldendeEllerStigende) {
+            return base.Channel.HentBevaegelserAsync(kolonne, faldendeEllerStigende);
         }
         
         public int HentTemperatur(int startInterval, int slutInterval) {
@@ -189,12 +213,44 @@ namespace TestProjekt.ServiceReference1 {
             return base.Channel.GlemtBrugernavnAsync(email);
         }
         
-        public string Opdaterbevægelse(string fra, string til) {
-            return base.Channel.Opdaterbevægelse(fra, til);
+        public string OpdaterTidsrum(string fra, string til) {
+            return base.Channel.OpdaterTidsrum(fra, til);
         }
         
-        public System.Threading.Tasks.Task<string> OpdaterbevægelseAsync(string fra, string til) {
-            return base.Channel.OpdaterbevægelseAsync(fra, til);
+        public System.Threading.Tasks.Task<string> OpdaterTidsrumAsync(string fra, string til) {
+            return base.Channel.OpdaterTidsrumAsync(fra, til);
+        }
+        
+        public WCFServiceWebRole1.Models.Brugere FindBruger(string brugernavn, int id, string email) {
+            return base.Channel.FindBruger(brugernavn, id, email);
+        }
+        
+        public System.Threading.Tasks.Task<WCFServiceWebRole1.Models.Brugere> FindBrugerAsync(string brugernavn, int id, string email) {
+            return base.Channel.FindBrugerAsync(brugernavn, id, email);
+        }
+        
+        public string OpdaterTidEfterMaaling(int minutAntal) {
+            return base.Channel.OpdaterTidEfterMaaling(minutAntal);
+        }
+        
+        public System.Threading.Tasks.Task<string> OpdaterTidEfterMaalingAsync(int minutAntal) {
+            return base.Channel.OpdaterTidEfterMaalingAsync(minutAntal);
+        }
+        
+        public string OpdaterTidEfterAlarmering(int minutAntal) {
+            return base.Channel.OpdaterTidEfterAlarmering(minutAntal);
+        }
+        
+        public System.Threading.Tasks.Task<string> OpdaterTidEfterAlarmeringAsync(int minutAntal) {
+            return base.Channel.OpdaterTidEfterAlarmeringAsync(minutAntal);
+        }
+        
+        public WCFServiceWebRole1.Models.Politistatistik[] ScrapeStatistik() {
+            return base.Channel.ScrapeStatistik();
+        }
+        
+        public System.Threading.Tasks.Task<WCFServiceWebRole1.Models.Politistatistik[]> ScrapeStatistikAsync() {
+            return base.Channel.ScrapeStatistikAsync();
         }
     }
 }
