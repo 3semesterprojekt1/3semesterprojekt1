@@ -52,6 +52,8 @@ namespace WCFServiceWebRole1
         [OperationContract]
         string OpdaterTidEfterAlarmering(int minutAntal);
 
+        [OperationContract]
+        List<Politistatistik> ScrapeStatistik();
 
     }
 }
