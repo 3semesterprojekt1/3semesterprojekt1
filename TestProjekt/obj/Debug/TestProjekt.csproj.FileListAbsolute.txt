@@ -14,22 +14,6 @@ C:\Users\Selzamouri\documents\visual studio 2015\Projects\SemesterProjektWebServ
 C:\Users\Selzamouri\documents\visual studio 2015\Projects\SemesterProjektWebService\TestProjekt\bin\Debug\EntityFramework.xml
 C:\Users\Selzamouri\documents\visual studio 2015\Projects\SemesterProjektWebService\TestProjekt\obj\Debug\TestProjekt.dll
 C:\Users\Selzamouri\documents\visual studio 2015\Projects\SemesterProjektWebService\TestProjekt\obj\Debug\TestProjekt.pdb
-C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\TestProjekt.dll
-C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\TestProjekt.pdb
-C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
-C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\WCFServiceWebRole1.dll
-C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\EntityFramework.dll
-C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\SendGridMail.dll
-C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\Microsoft.WindowsAzure.ServiceRuntime.dll
-C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\SendGrid.SmtpApi.dll
-C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\WindowsAzureTelemetryEvents.dll
-C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\WindowsAzureEventSource.dll
-C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\WCFServiceWebRole1.pdb
-C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
-C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\EntityFramework.xml
-C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\TestProjekt\obj\Debug\TestProjekt.csprojResolveAssemblyReference.cache
-C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\TestProjekt\obj\Debug\TestProjekt.dll
-C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\TestProjekt\obj\Debug\TestProjekt.pdb
 C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt\TestProjekt\bin\Debug\TestProjekt.dll
 C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt\TestProjekt\bin\Debug\TestProjekt.pdb
 C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt\TestProjekt\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
@@ -46,7 +30,6 @@ C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt\TestProjekt\bin\Debug\En
 C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt\TestProjekt\obj\Debug\TestProjekt.csprojResolveAssemblyReference.cache
 C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt\TestProjekt\obj\Debug\TestProjekt.dll
 C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt\TestProjekt\obj\Debug\TestProjekt.pdb
-C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\TestProjekt.dll.config
 C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\TestProjekt.dll.config
 C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\TestProjekt.dll
 C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\TestProjekt.pdb
@@ -66,10 +49,3 @@ C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\M
 C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\TestProjekt\obj\Debug\TestProjekt.csprojResolveAssemblyReference.cache
 C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\TestProjekt\obj\Debug\TestProjekt.dll
 C:\Users\SanneWinther\Documents\GitHub\3semesterprojekt1\TestProjekt\obj\Debug\TestProjekt.pdb
-C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\phantomjs.exe
-C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\chromedriver.exe
-C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\phantomjs-license.txt
-C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\WebDriver.dll
-C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\TestProjekt\bin\Debug\WebDriver.xml

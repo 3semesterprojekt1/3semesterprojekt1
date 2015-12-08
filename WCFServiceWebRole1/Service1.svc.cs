@@ -348,13 +348,13 @@ namespace WCFServiceWebRole1
             {
                 var f = TimeSpan.Parse(fra);
                 var t = TimeSpan.Parse(til);
-
-                int id = 1;
-                Tider tid = new Tider() { Fra = f, Id = id, Til = t };
-                using (DataContext client = new DataContext())
+                using (DataContext dataContext = new DataContext())
                 {
-                    client.Tider.AddOrUpdate(tid);
-                    client.SaveChanges();
+                    Tider tid = dataContext.Tider.FirstOrDefault(tider => tider.Id == 1);
+                    tid.Fra = f;
+                    tid.Til = t;
+                    dataContext.Tider.AddOrUpdate(tid);
+                    dataContext.SaveChanges();
                     _ta = Task.Run((() => SensorLoop()));
                     return "Tidsrummet blev ændret";
                 }
@@ -424,23 +424,24 @@ namespace WCFServiceWebRole1
         {
             List<Politistatistik> politistatistik = new List<Politistatistik>();
             int aarsTal = 2007;
-            IWebDriver webDriver = new PhantomJSDriver();
-
-            webDriver.Navigate().GoToUrl("http://www.politistatistik.dk/parameter.aspx?id=27");
-
-            webDriver.FindElement(By.XPath("//*[@id='geo00']/optgroup/option[8]")).Click();
-            webDriver.FindElement(By.XPath("//*[@id='kriminalitet01']/optgroup[2]/option[5]")).Click();
-            webDriver.FindElement(By.XPath("//*[@id='rightCloBaggr']/div[5]/div[3]/div[2]/input")).Click();
-            foreach (var aar in webDriver.FindElements(By.XPath("//*[@name='periodeYear']")))
+            using (IWebDriver webDriver = new PhantomJSDriver())
             {
-                aar.Click();
-            }
-            webDriver.FindElement(By.XPath("//*[@id='rightCol']/div[2]/div/div[3]/img")).Click();
-            webDriver.SwitchTo().Window(webDriver.WindowHandles.Last());
+                webDriver.Navigate().GoToUrl("http://www.politistatistik.dk/parameter.aspx?id=27");
 
-            foreach (var item in webDriver.FindElements(By.ClassName("dataitem")))
-            {
-                politistatistik.Add(new Politistatistik(aarsTal++, item.Text));
+                webDriver.FindElement(By.XPath("//*[@id='geo00']/optgroup/option[8]")).Click();
+                webDriver.FindElement(By.XPath("//*[@id='kriminalitet01']/optgroup[2]/option[5]")).Click();
+                webDriver.FindElement(By.XPath("//*[@id='rightCloBaggr']/div[5]/div[3]/div[2]/input")).Click();
+                foreach (var aar in webDriver.FindElements(By.XPath("//*[@name='periodeYear']")))
+                {
+                    aar.Click();
+                }
+                webDriver.FindElement(By.XPath("//*[@id='rightCol']/div[2]/div/div[3]/img")).Click();
+                webDriver.SwitchTo().Window(webDriver.WindowHandles.Last());
+
+                foreach (var item in webDriver.FindElements(By.ClassName("dataitem")))
+                {
+                    politistatistik.Add(new Politistatistik(aarsTal++, item.Text));
+                }
             }
             return politistatistik.ToList();
         }

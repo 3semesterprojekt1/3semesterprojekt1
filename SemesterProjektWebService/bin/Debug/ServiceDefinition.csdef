@@ -27,6 +27,12 @@
       <Content destination=".\">
         <SourceDirectory path="C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\SemesterProjektWebService\rcf\Debug\WCFServiceWebRole1Content\" />
       </Content>
+      <Content destination=".\">
+        <SourceDirectory path="C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\SemesterProjektWebService\ecf\WCFServiceWebRole1Content\" />
+      </Content>
     </Contents>
+    <Imports>
+      <Import moduleName="Diagnostics" />
+    </Imports>
   </WebRole>
 </ServiceDefinition>
