@@ -49,6 +49,9 @@ namespace WCFServiceWebRole1
         [OperationContract]
         string OpdaterTidEfterMaaling(int minutAntal);
 
+        [OperationContract]
+        string OpdaterTidEfterAlarmering(int minutAntal);
+
 
     }
 }

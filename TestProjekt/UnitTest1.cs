@@ -230,9 +230,45 @@ namespace TestProjekt
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestSoveTidEfterMaalingNul()
         {
-            Assert.AreEqual("Værdien skal være større end 0", service.OpdaterTidEfterMaaling(-5));
+            tider.SoveTidEfterMaaling = 0;
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestSoveTidEfterMaalingNegativ()
+        {
+            tider.SoveTidEfterMaaling = -5;
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestSoveTidEfterMaalingMax()
+        {
+            tider.SoveTidEfterMaaling = 86400001;
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestSoveTidEfterAlarmeringNul()
+        {
+            tider.SoveTidEfterAlarmering = 0;
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestSoveTidEfterAlarmeringNegativ()
+        {
+            tider.SoveTidEfterAlarmering = -5;
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestSoveTidEfterAlarmeringMax()
+        {
+            tider.SoveTidEfterAlarmering = 86400001;
         }
 
         #endregion
@@ -276,7 +312,27 @@ namespace TestProjekt
         //}
 
         #endregion
-        
+
+
+        #region TestOpdaterTidEfterMaaling og Alarmering
+
+        [TestMethod]
+        public void TestOpdaterTidEfterMaaling()
+        {
+            Assert.AreEqual("Måleren sover nu i " + 60 + " minutter efter at den har målt",
+                service.OpdaterTidEfterMaaling(60));
+        }
+
+        [TestMethod]
+        public void TestOpdaterTidEfterAlarmering()
+        {
+            Assert.AreEqual("Alarmen sover nu i " + (60) + " efter den er gået af",
+                service.OpdaterTidEfterAlarmering(60));
+        }
+
+        #endregion
+
+
         #region TestHentTemperatur
 
         [TestMethod]

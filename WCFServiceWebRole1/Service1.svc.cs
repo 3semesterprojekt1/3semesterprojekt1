@@ -384,10 +384,7 @@ namespace WCFServiceWebRole1
                         dataContext.SaveChanges();
                         return "Måleren sover nu i " + (minutAntal) + " minutter efter at den har målt";
                     }
-                    else
-                    {
-                        return "Der gik noget galt. Tiden kunne ikke findes";
-                    }
+                    return "Der gik noget galt. Tiden kunne ikke findes";
                 }
             }
             catch (Exception ex)
@@ -395,6 +392,32 @@ namespace WCFServiceWebRole1
                 return ex.Message;
             }
         }
+
+        public string OpdaterTidEfterAlarmering(int minutAntal)
+        {
+            int milisekundAntal = minutAntal * 60000;
+            try
+            {
+                using (DataContext dataContext = new DataContext())
+                {
+                    Tider tid = dataContext.Tider.FirstOrDefault(h => h.Id == 1);
+                    if (tid != null)
+                    {
+                        tid.SoveTidEfterAlarmering = milisekundAntal;
+                        dataContext.Tider.AddOrUpdate(tid);
+                        dataContext.SaveChanges();
+                        return "Alarmen sover nu i " + (minutAntal) + " efter den er gået af";
+                    }
+                    return "Der gik noget galt. Tiden kunne ikke findes";
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return ex.Message;
+            }
+        }
+
 
         private void SendEmail(string modtager, string emne, string besked, string uniktIndhold = null)
         {
