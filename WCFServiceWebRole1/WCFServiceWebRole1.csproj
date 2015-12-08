@@ -121,8 +121,20 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebDriver, Version=2.48.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.WebDriver.2.48.2\lib\net40\WebDriver.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\packages\PhantomJS.2.0.0\tools\phantomjs\phantomjs.exe">
+      <Link>phantomjs.exe</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\WebDriver.ChromeDriver.win32.2.20.0.0\content\chromedriver.exe">
+      <Link>chromedriver.exe</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Database\database.sql" />
     <None Include="Service References\VejrService\configuration91.svcinfo" />
     <None Include="Service References\VejrService\configuration.svcinfo" />
@@ -130,12 +142,16 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="phantomjs-license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Service1.svc" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContext.cs" />
     <Compile Include="Models\Bevaegelser.cs" />
     <Compile Include="Models\Brugere.cs" />
+    <Compile Include="Models\Politistatistik.cs" />
     <Compile Include="Service References\VejrService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
