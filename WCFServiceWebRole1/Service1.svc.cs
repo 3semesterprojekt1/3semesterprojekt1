@@ -19,8 +19,9 @@ using WCFServiceWebRole1.Models;
 
 namespace WCFServiceWebRole1
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
-    // NOTE: In order to launch WCF GetCount Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
+    /// <summary>
+    /// Klassenavndeklaration
+    /// </summary>
     public class Service1 : IService1
     {
         private const int Port = 7000;
@@ -31,6 +32,9 @@ namespace WCFServiceWebRole1
         private static Task _ta;
         private static bool _alarmBool;
 
+        /// <summary>
+        /// Konstruktør
+        /// </summary>
         public Service1()
         {
             try
@@ -401,6 +405,11 @@ namespace WCFServiceWebRole1
             }
         }
 
+        /// <summary>
+        /// Opdaterer tiden hvori sensoren sover efter alarmering
+        /// </summary>
+        /// <param name="minutAntal"></param>
+        /// <returns>string med resultat</returns>
         public string OpdaterTidEfterAlarmering(int minutAntal)
         {
             int milisekundAntal = minutAntal * 60000;
@@ -425,7 +434,10 @@ namespace WCFServiceWebRole1
                 return ex.Message;
             }
         }
-
+        /// <summary>
+        /// Scraper statistik for data
+        /// </summary>
+        /// <returns>Liste af statistik-objekter</returns>
         public List<Politistatistik> ScrapeStatistik()
         {
             List<Politistatistik> politistatistik = new List<Politistatistik>();
@@ -452,7 +464,6 @@ namespace WCFServiceWebRole1
             return politistatistik.ToList();
         }
 
-
         private void SendEmail(string modtager, string emne, string besked, string uniktIndhold = null)
         {
             // Emailoprettelse
@@ -470,6 +481,13 @@ namespace WCFServiceWebRole1
             transportWeb.DeliverAsync(email);
 #pragma warning restore 4014
         }
+        /// <summary>
+        /// Finder bruger ud fra skrevne parametre
+        /// </summary>
+        /// <param name="brugernavn"></param>
+        /// <param name="id"></param>
+        /// <param name="email"></param>
+        /// <returns>Bruger-objekt</returns>
         public Brugere FindBruger(string brugernavn = null, int id = 0, string email = null)
         {
             using (DataContext dataContext = new DataContext())
