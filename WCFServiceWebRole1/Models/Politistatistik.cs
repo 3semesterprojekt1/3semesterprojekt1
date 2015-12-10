@@ -18,5 +18,10 @@ namespace WCFServiceWebRole1.Models
         public int Aar { get; set; }
         [DataMember]
         public string Indbrud { get; set; }
+
+        public override string ToString()
+        {
+            return $"Aar: {Aar}, Indbrud: {Indbrud}";
+        }
     }
 }

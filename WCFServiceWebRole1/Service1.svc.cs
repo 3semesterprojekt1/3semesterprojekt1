@@ -56,12 +56,12 @@ namespace WCFServiceWebRole1
                     string sti = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName + "/pandpLog";
                     if (Directory.Exists(sti))
                     {
-                        _fileStream = new FileStream(sti + "/pandplogfile - " + 5 + ".txt", FileMode.Append);
+                        _fileStream = new FileStream(sti + "/pandplogfile.txt", FileMode.Append);
                     }
                     else
                     {
                         Directory.CreateDirectory(sti);
-                        _fileStream = new FileStream(sti + "/pandplogfile - " + 6 + ".txt", FileMode.Append);
+                        _fileStream = new FileStream(sti + "/pandplogfile.txt", FileMode.Append);
                     }
                 }
                     
@@ -675,7 +675,14 @@ namespace WCFServiceWebRole1
                         //byte[] staticBytes = Encoding.ASCII.GetBytes(testmessage);
                         byte[] bytes = _client.Receive(ref _ipAddress);
                         Task.Run(() => DataBehandling(bytes, ref _senesteDato, ref _senesteTid));
-                        Thread.Sleep(60000);
+
+                        var firstOrDefault = dataContext.Tider.FirstOrDefault(t => t.Id == 1);
+                        if (firstOrDefault != null && firstOrDefault.SoveTidEfterMaaling > 0)
+                            Thread.Sleep(firstOrDefault.SoveTidEfterMaaling);
+                        else
+                        {
+                            Thread.Sleep(60000);
+                        }
                     }
                 }
             }
@@ -690,10 +697,19 @@ namespace WCFServiceWebRole1
         }
         private void AktiverAlarm()
         {
-            while (true)
+            using (DataContext dataContext = new DataContext())
             {
-                _alarmBool = true;
-                Thread.Sleep(3600000);
+                while (true)
+                {
+                    _alarmBool = true;
+                    var firstOrDefault = dataContext.Tider.FirstOrDefault(t => t.Id == 1);
+                    if (firstOrDefault != null && firstOrDefault.SoveTidEfterAlarmering > 0)
+                        Thread.Sleep(firstOrDefault.SoveTidEfterAlarmering);
+                    else
+                    {
+                        Thread.Sleep(3600000);
+                    }
+                }
             }
         }
         private void DataBehandling(byte[] bytes, ref DateTime senesteDato, ref TimeSpan senesteTid)

@@ -407,6 +407,23 @@ namespace TestProjekt
 
         #endregion
 
+        #region TestGlemtPassword
+
+        [TestMethod]
+        public void TestGlemtPassword() //Unittest
+        {
+            Assert.AreEqual("E-mailen findes ikke", service.GlemtPassword("Dinmor"));
+        }
+
+        [TestMethod]
+        public void TestGlemtPassword1() //Integration test
+        {
+            Assert.AreEqual("E-mailen findes ikke", client.GlemtPassword("Jørgennetteo"));
+        }
+
+        #endregion
+
+
         #region TestHentBevaegelse
 
         [TestMethod]
@@ -465,6 +482,54 @@ namespace TestProjekt
         public void TestHentBevaegelseSorterTemperaturStigende()
         {
             Bevaegelser b = service.HentBevaegelser("Dato", "stigende")[0];
+            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 02, 17), new TimeSpan(08, 22, 22), 8);
+            Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
+        }
+
+        [TestMethod]
+        public void TestHentBevaegelseSorterTidspunktFaldende1()
+        {
+            Bevaegelser b = client.HentBevaegelser("Tidspunkt", "faldende")[0];
+            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 04, 01), new TimeSpan(22, 45, 00), 10);
+            Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
+        }
+
+        [TestMethod]
+        public void TestHentBevaegelseSorterTidspunktStigende1()
+        {
+            Bevaegelser b = client.HentBevaegelser("Tidspunkt", "stigende")[0];
+            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 02, 17), new TimeSpan(08, 22, 22), 8);
+            Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
+        }
+
+        [TestMethod]
+        public void TestHentBevaegelseSorterDatoFaldende1()
+        {
+            Bevaegelser b = client.HentBevaegelser("Dato", "faldende")[0];
+            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 04, 01), new TimeSpan(22, 45, 00), 10);
+            Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
+        }
+
+        [TestMethod]
+        public void TestHentBevaegelseSorterDatoStigende1()
+        {
+            Bevaegelser b = client.HentBevaegelser("Dato", "stigende")[0];
+            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 02, 17), new TimeSpan(08, 22, 22), 8);
+            Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
+        }
+
+        [TestMethod]
+        public void TestHentBevaegelseSorterTemperaturFaldende1()
+        {
+            Bevaegelser b = client.HentBevaegelser("Dato", "faldende")[0];
+            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 04, 01), new TimeSpan(22, 45, 00), 10);
+            Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
+        }
+
+        [TestMethod]
+        public void TestHentBevaegelseSorterTemperaturStigende1()
+        {
+            Bevaegelser b = client.HentBevaegelser("Dato", "stigende")[0];
             Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 02, 17), new TimeSpan(08, 22, 22), 8);
             Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
         }
