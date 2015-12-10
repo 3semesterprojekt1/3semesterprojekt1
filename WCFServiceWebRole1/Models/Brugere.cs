@@ -77,10 +77,15 @@ namespace WCFServiceWebRole1.Models
 
         private void CheckEmail(string email)
         {
+            if (email == null)
+            {
+                throw new ArgumentException("Email skal udfyldes");
+            }
             if (!email.Contains("@"))
             {
-                throw new ArgumentException("Email er forkert" + " (" + email + ")");
+                throw new ArgumentException("Email skal indeholde @" + " (" + email + ")");
             }
+
         }
 
         public Brugere(string brugernavn, string password, string email)
@@ -94,6 +99,11 @@ namespace WCFServiceWebRole1.Models
         public Brugere()
         {
             
+        }
+
+        public override string ToString()
+        {
+            return $"Brugernavn: {Brugernavn}, Password: EncryptedText, Email: {Email}";
         }
     }
 }

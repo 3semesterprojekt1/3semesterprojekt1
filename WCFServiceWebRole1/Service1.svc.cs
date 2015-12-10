@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Sockets;
@@ -31,6 +33,8 @@ namespace WCFServiceWebRole1
         private static TimeSpan _senesteTid;
         private static Task _ta;
         private static bool _alarmBool;
+        private static FileStream _fileStream;
+        private static TextWriterTraceListener _tracer;
 
         /// <summary>
         /// Konstruktør
@@ -47,13 +51,36 @@ namespace WCFServiceWebRole1
                 {
                     _ipAddress = new IPEndPoint(IPAddress.Any, Port);
                 }
+                if (_fileStream == null)
+                {
+                    string sti = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName + "/pandpLog";
+                    if (Directory.Exists(sti))
+                    {
+                        _fileStream = new FileStream(sti + "/pandplogfile - " + 5 + ".txt", FileMode.Append);
+                    }
+                    else
+                    {
+                        Directory.CreateDirectory(sti);
+                        _fileStream = new FileStream(sti + "/pandplogfile - " + 6 + ".txt", FileMode.Append);
+                    }
+                }
+                    
+                if (_tracer == null)
+                {
+                    _tracer = new TextWriterTraceListener(_fileStream);
+                    Trace.Listeners.Add(_tracer);
+                    Trace.AutoFlush = true;
+                    Trace.WriteLine("-------------------------------------------------------");
+                    Trace.WriteLine("[" + DateTime.Now + "]" + " - " + "Webservice staret..");
+                }
                 if (_ta == null)
                 {
                     _ta = Task.Run((() => SensorLoop()));
                 }
-            }
+        }
             catch (Exception)
             {
+               
             }
         }
 
@@ -71,8 +98,10 @@ namespace WCFServiceWebRole1
                 {
                     dataContext.Bevaegelser.Remove(b);
                     dataContext.SaveChanges();
+                    TraceHjaelp(new []{id.ToString()}, b.ToString());
                     return b;
                 }
+                TraceHjaelp(new []{id.ToString()}, "null");
                 return null;
             }
         }
@@ -89,24 +118,49 @@ namespace WCFServiceWebRole1
             using (DataContext dataContext = new DataContext())
             {
                 Brugere exBruger = FindBruger(brugernavn);
-
                 if (exBruger == null)
                 {
+                    if (brugernavn == null)
+                    {
+                        string fejlStreng = "Brugernavnet skal udfyldes";
+                        TraceHjaelp(new[] { brugernavn, "EncryptedText", email }, fejlStreng);
+                        return fejlStreng;
+                    }
+                    if (password == null)
+                    {
+                        string fejlStreng1 = "Password skal udfyldes";
+                        TraceHjaelp(new[] { brugernavn, "EncryptedText", email }, fejlStreng1);
+                        return fejlStreng1;
+                    }
+                    if (email == null)
+                    {
+                        string fejlStreng2 = "Email skal udfyldes";
+                        TraceHjaelp(new[] {brugernavn, "EncryptedText", email}, fejlStreng2);
+                        return fejlStreng2;
+                    }
                     try
                     {
-                        Brugere b = new Brugere() { Brugernavn = brugernavn, Password = KrypterStreng(password), Email = email };
+                        Brugere b = new Brugere() {Brugernavn = brugernavn, Password = password, Email = email};
+                        b.Password = KrypterStreng(password);
                         dataContext.Brugere.Add(b);
                         dataContext.SaveChanges();
-                        return brugernavn + " er oprettet i databasen";
+                        string succesStreng = brugernavn + " er oprettet i databasen";
+                        TraceHjaelp(new[] {brugernavn, "EncryptedText", email}, succesStreng);
+                        return succesStreng;
                     }
                     catch (ArgumentException ex)
                     {
+                        TraceHjaelp(new[] {brugernavn, "EncryptedText", email}, ex.Message);
                         return ex.Message;
                     }
                 }
-                return "Brugernavnet findes allerede i databasen";
+
             }
+                string fejlStreng3 = "Brugernavnet findes allerede i databasen";
+                TraceHjaelp(new[] { brugernavn, "EncryptedText", email }, fejlStreng3);
+                return fejlStreng3;
         }
+
 
         /// <summary>
         /// Opdaterer den pågældende brugers password til det skrevne password
@@ -127,15 +181,19 @@ namespace WCFServiceWebRole1
                         b.Password = KrypterStreng(password);
                         dataContext.Brugere.AddOrUpdate(b);
                         dataContext.SaveChanges();
-                        return "Password er ændret";
+                        string succesStreng = "Password er ændret";
+                        TraceHjaelp(new []{brugernavn, "EncryptedText"}, succesStreng);
+                        return succesStreng;
                     }
                     catch (ArgumentException ex)
                     {
-
+                        TraceHjaelp(new[] { brugernavn, "EncryptedText" }, ex.Message);
                         return ex.Message;
                     }
                 }
-                return "Der gik noget galt med at finde din bruger. Prøv igen";
+                string fejlStreng = "Der gik noget galt med at finde din bruger. Prøv igen";
+                TraceHjaelp(new[] { brugernavn, "EncryptedText" }, fejlStreng);
+                return fejlStreng;
             }
         }
 
@@ -157,14 +215,19 @@ namespace WCFServiceWebRole1
                         b.Email = email;
                         dataContext.Brugere.AddOrUpdate(b);
                         dataContext.SaveChanges();
-                        return "Email er ændret";
+                        string succesStreng = "Email er ændret";
+                        TraceHjaelp(new []{brugernavn, email}, succesStreng);
+                        return succesStreng;
                     }
                     catch (ArgumentException ex)
                     {
+                        TraceHjaelp(new[] { brugernavn, email }, ex.Message);
                         return ex.Message;
                     }
                 }
-                return "Der gik noget galt med at finde din bruger. Prøv igen";
+                string fejlStreng = "Der gik noget galt med at finde din bruger. Prøv igen";
+                TraceHjaelp(new[] { brugernavn, email }, fejlStreng);
+                return fejlStreng;
             }
         }
 
@@ -178,14 +241,17 @@ namespace WCFServiceWebRole1
         {
             Brugere b1 = FindBruger(brugernavn);
 
-            if (b1 != null)
+            if (b1 != null && password != null)
             {
                 if (b1.Password == KrypterStreng(password))
                 {
+                    TraceHjaelp(new []{brugernavn, "EncryptedText"}, "Login succesfuldt");
                     return b1.Brugernavn;
                 }
             }
-            return "Brugernavnet/passwordet er forkert";
+            string fejlStreng = "Brugernavnet/passwordet er forkert";
+            TraceHjaelp(new[] {brugernavn, "EncryptedText"}, fejlStreng);
+            return fejlStreng;
         }
 
         /// <summary>
@@ -196,6 +262,7 @@ namespace WCFServiceWebRole1
         /// <returns>En liste med alle bevægelser</returns>
         public List<Bevaegelser> HentBevaegelser(string kolonne, string faldendeEllerStigende)
         {
+            TraceHjaelp(new []{kolonne, faldendeEllerStigende}, "kaldt");
             using (DataContext dataContext = new DataContext())
             {
                 switch (kolonne)
@@ -206,15 +273,18 @@ namespace WCFServiceWebRole1
                             case "stigende":
                             {
                                 var query = from q in dataContext.Bevaegelser orderby q.Tidspunkt ascending select q;
-                                return query.ToList();
+                                    TraceHjaelp(new[] { kolonne, faldendeEllerStigende }, query.Count().ToString() + " Elementer returneret");
+                                    return query.ToList();
                             }
                             case "faldende":
                             {
                                 var query = from q in dataContext.Bevaegelser orderby q.Tidspunkt descending select q;
-                                return query.ToList();
+                                    TraceHjaelp(new[] { kolonne, faldendeEllerStigende }, query.Count().ToString() + " Elementer returneret");
+                                    return query.ToList();
                             }
                             default:
                                 var queryDefault = from q in dataContext.Bevaegelser orderby q.Dato descending orderby q.Tidspunkt descending select q;
+                                TraceHjaelp(new[] { kolonne, faldendeEllerStigende }, queryDefault.Count().ToString() + " Elementer returneret");
                                 return queryDefault.ToList();
                         }
                     case "Dato":
@@ -223,15 +293,18 @@ namespace WCFServiceWebRole1
                             case "stigende":
                             {
                                 var query = from q in dataContext.Bevaegelser orderby q.Dato ascending select q;
-                                return query.ToList();
+                                    TraceHjaelp(new[] { kolonne, faldendeEllerStigende }, query.Count().ToString() + " Elementer returneret");
+                                    return query.ToList();
                             }
                             case "faldende":
                             {
                                 var query = from q in dataContext.Bevaegelser orderby q.Dato descending select q;
-                                return query.ToList();
+                                    TraceHjaelp(new[] { kolonne, faldendeEllerStigende }, query.Count().ToString() + " Elementer returneret");
+                                    return query.ToList();
                             }
                             default:
                                 var queryDefault = from q in dataContext.Bevaegelser orderby q.Dato descending orderby q.Dato descending select q;
+                                TraceHjaelp(new[] { kolonne, faldendeEllerStigende }, queryDefault.Count().ToString() + " Elementer returneret");
                                 return queryDefault.ToList();
                         }
                     case "Temperatur":
@@ -240,19 +313,23 @@ namespace WCFServiceWebRole1
                             case "stigende":
                             {
                                 var query = from q in dataContext.Bevaegelser orderby q.Temperatur ascending select q;
-                                return query.ToList();
+                                    TraceHjaelp(new[] { kolonne, faldendeEllerStigende }, query.Count().ToString() + " Elementer returneret");
+                                    return query.ToList();
                             }
                             case "faldende":
                             {
                                 var query = from q in dataContext.Bevaegelser orderby q.Temperatur descending select q;
-                                return query.ToList();
+                                    TraceHjaelp(new[] { kolonne, faldendeEllerStigende }, query.Count().ToString() + " Elementer returneret");
+                                    return query.ToList();
                             }
                             default:
                                 var queryDefault = from q in dataContext.Bevaegelser orderby q.Dato descending orderby q.Temperatur descending select q;
+                                TraceHjaelp(new[] { kolonne, faldendeEllerStigende }, queryDefault.Count().ToString() + " Elementer returneret");
                                 return queryDefault.ToList();
                         }
                     default:
                         var queryDefault1 = from q in dataContext.Bevaegelser orderby q.Dato descending orderby q.Tidspunkt descending select q;
+                        TraceHjaelp(new[] { kolonne, faldendeEllerStigende }, queryDefault1.Count().ToString() + " Elementer returneret");
                         return queryDefault1.ToList();
                 }
             }
@@ -270,7 +347,9 @@ namespace WCFServiceWebRole1
                 var query = from p in datacontext.Bevaegelser
                             where p.Temperatur >= startInterval && p.Temperatur <= slutInterval
                             select p;
-                return query.Count();
+                int succesInt = query.Count();
+                TraceHjaelp(new []{startInterval.ToString(), slutInterval.ToString()}, succesInt.ToString());
+                return succesInt;
             }
             
         }
@@ -296,13 +375,18 @@ namespace WCFServiceWebRole1
                             where q.Dato >= startsDato
                             where q.Dato <= slutsDato
                             select q;
-                        return query.Count();
+                        int succesInt = query.Count();
+                        TraceHjaelp(new[] { aarstal.ToString(), maaned.ToString(), slutdag.ToString() }, succesInt.ToString());
+                        return succesInt;
                     }
                 }
-                return 0;
+                int fejlInt = 0;
+                TraceHjaelp(new[] { aarstal.ToString(), maaned.ToString(), slutdag.ToString() }, fejlInt.ToString());
+                return fejlInt;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                TraceHjaelp(new []{aarstal.ToString(), maaned.ToString(), slutdag.ToString()}, ex.Message);
                 return 0;
             }
         }
@@ -321,9 +405,13 @@ namespace WCFServiceWebRole1
                 string pw = TilfaeldigStreng(6);
                 SendEmail(b.Email, "Nyt password", "Du har fået tilsendt nyt password. Passwordet er: " + pw);
                 OpdaterPassword(b.Brugernavn, pw);
-                return "E-mail er sendt til " + b.Email;
+                string succesStreng = "E-mail er sendt til " + b.Email;
+                TraceHjaelp(new []{brugernavn}, succesStreng);
+                return succesStreng;
             }
-            return "E-mailen findes ikke";
+            string fejlStreng = "Brugeren findes ikke";
+            TraceHjaelp(new[] { brugernavn }, fejlStreng);
+            return fejlStreng;
         }
 
         /// <summary>
@@ -333,17 +421,26 @@ namespace WCFServiceWebRole1
         /// <returns>string med resultat</returns>
         public string GlemtBrugernavn(string email)
         {
-            Brugere b = FindBruger(null, 0, email);
-            if (!email.Contains("@"))
+            if (email != null)
             {
-                return "Email er ikke gyldig (Skal indeholde @)";
+                Brugere b = FindBruger(null, 0, email);
+                if (!email.Contains("@"))
+                {
+                    string fejlStreng = "Email er ikke gyldig (Skal indeholde @)";
+                    TraceHjaelp(new[] {email}, fejlStreng);
+                    return fejlStreng;
+                }
+                if (b != null)
+                {
+                    SendEmail(b.Email, "Brugernavn genfindelse", "Dit brugernavn er: ", b.Brugernavn);
+                    string succesStreng = "Brugernavn er sendt til " + email;
+                    TraceHjaelp(new[] {email}, succesStreng);
+                    return succesStreng;
+                }
             }
-            if (b != null)
-            {
-                SendEmail(b.Email, "Brugernavn genfindelse", "Dit brugernavn er: ", b.Brugernavn);
-                return "Brugernavn er sendt til " + email;
-            }
-            return "Email eksisterer ikke i databasen";
+            string fejlStreng1 = "Email eksisterer ikke i databasen";
+            TraceHjaelp(new []{email}, fejlStreng1);
+            return fejlStreng1;
         }
 
         /// <summary>
@@ -354,6 +451,18 @@ namespace WCFServiceWebRole1
         /// <returns>string med resultat</returns>
         public string OpdaterTidsrum(string fra, string til)
         {
+            if (fra == null)
+            {
+                string succesStreng = "Fra skal udfyldes";
+                TraceHjaelp(new[] { fra, til }, succesStreng);
+                return succesStreng;
+            }
+            if (til == null)
+            {
+                string succesStreng1 = "Til skal udfyldes";
+                TraceHjaelp(new[] { fra, til }, succesStreng1);
+                return succesStreng1;
+            }
             try
             {
                 var f = TimeSpan.Parse(fra);
@@ -366,12 +475,15 @@ namespace WCFServiceWebRole1
                     dataContext.Tider.AddOrUpdate(tid);
                     dataContext.SaveChanges();
                     _ta = Task.Run((() => SensorLoop()));
-                    return "Tidsrummet blev ændret";
+                    string succesStreng = "Tidsrummet blev ændret";
+                    TraceHjaelp(new []{fra, til}, succesStreng);
+                    return succesStreng;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return "Tallet er forkert";
+                TraceHjaelp(new[] { fra, til }, ex.Message);
+                return "Formatet skal være (HH:MM:SS)";
             }
 
         }
@@ -394,13 +506,18 @@ namespace WCFServiceWebRole1
                         tid.SoveTidEfterMaaling = milisekundAntal;
                         dataContext.Tider.AddOrUpdate(tid);
                         dataContext.SaveChanges();
-                        return "Måleren sover nu i " + (minutAntal) + " minutter efter at den har målt";
+                        string succesStreng = "Måleren sover nu i " + (minutAntal) + " minutter efter at den har målt";
+                        TraceHjaelp(new []{minutAntal.ToString()}, succesStreng);
+                        return succesStreng;
                     }
-                    return "Der gik noget galt. Tiden kunne ikke findes";
+                    string fejlStreng = "Der gik noget galt. Tiden kunne ikke findes";
+                    TraceHjaelp(new[] { minutAntal.ToString() }, fejlStreng);
+                    return fejlStreng;
                 }
             }
             catch (Exception ex)
             {
+                TraceHjaelp(new[] { minutAntal.ToString() }, ex.Message);
                 return ex.Message;
             }
         }
@@ -423,14 +540,18 @@ namespace WCFServiceWebRole1
                         tid.SoveTidEfterAlarmering = milisekundAntal;
                         dataContext.Tider.AddOrUpdate(tid);
                         dataContext.SaveChanges();
-                        return "Alarmen sover nu i " + (minutAntal) + " minutter efter den er gået af";
+                        string succesStreng = "Alarmen sover nu i " + (minutAntal) + " minutter efter den er gået af";
+                        TraceHjaelp(new []{minutAntal.ToString()}, succesStreng);
+                        return succesStreng;
                     }
-                    return "Der gik noget galt. Tiden kunne ikke findes";
+                    string fejlStreng = "Der gik noget galt. Tiden kunne ikke findes";
+                    TraceHjaelp(new[] { minutAntal.ToString() }, fejlStreng);
+                    return fejlStreng;
                 }
             }
             catch (Exception ex)
             {
-
+                TraceHjaelp(new[] { minutAntal.ToString() }, ex.Message);
                 return ex.Message;
             }
         }
@@ -461,7 +582,55 @@ namespace WCFServiceWebRole1
                     politistatistik.Add(new Politistatistik(aarsTal++, item.Text));
                 }
             }
-            return politistatistik.ToList();
+            List<Politistatistik> list = politistatistik.ToList();
+            TraceHjaelp(new []{""}, list.ToString());
+            return list;
+        }
+
+        /// <summary>
+        /// Finder bruger ud fra skrevne parametre
+        /// </summary>
+        /// <param name="brugernavn"></param>
+        /// <param name="id"></param>
+        /// <param name="email"></param>
+        /// <returns>Bruger-objekt</returns>
+        public Brugere FindBruger(string brugernavn = null, int id = 0, string email = null)
+        {
+            using (DataContext dataContext = new DataContext())
+            {
+                if (email != null)
+                {
+                    Brugere b = dataContext.Brugere.FirstOrDefault(bruger => bruger.Email == email);
+                    if (b != null)
+                    {
+                        TraceHjaelp(new[] { brugernavn, id.ToString(), email }, b.ToString());
+                        return b;
+                    }
+                    TraceHjaelp(new []{brugernavn, id.ToString(), email}, "Brugeren er Null");
+                    return null;
+                }
+                if (brugernavn != null)
+                {
+                    Brugere b = dataContext.Brugere.FirstOrDefault(bruger => bruger.Brugernavn == brugernavn);
+                    if (b != null)
+                    {
+                        TraceHjaelp(new[] { brugernavn, id.ToString(), email }, b.ToString());
+                        return b;
+                    }
+                    TraceHjaelp(new[] { brugernavn, id.ToString(), email }, "Brugeren er Null");
+                    return null;
+                }
+                Brugere br = dataContext.Brugere.FirstOrDefault(bruger => bruger.Id == id);
+                if (br != null)
+                {
+                    TraceHjaelp(new[] { brugernavn, id.ToString(), email }, br.ToString());
+                    return br;
+                }
+                TraceHjaelp(new[] { brugernavn, id.ToString(), email }, "Brugeren er Null");
+                return null;
+
+
+            }
         }
 
         private void SendEmail(string modtager, string emne, string besked, string uniktIndhold = null)
@@ -481,31 +650,7 @@ namespace WCFServiceWebRole1
             transportWeb.DeliverAsync(email);
 #pragma warning restore 4014
         }
-        /// <summary>
-        /// Finder bruger ud fra skrevne parametre
-        /// </summary>
-        /// <param name="brugernavn"></param>
-        /// <param name="id"></param>
-        /// <param name="email"></param>
-        /// <returns>Bruger-objekt</returns>
-        public Brugere FindBruger(string brugernavn = null, int id = 0, string email = null)
-        {
-            using (DataContext dataContext = new DataContext())
-            {
-                if (email != null)
-                {
-                    Brugere b = dataContext.Brugere.FirstOrDefault(bruger => bruger.Email == email);
-                    return b;
-                }
-                if (brugernavn != null)
-                {
-                    Brugere b = dataContext.Brugere.FirstOrDefault(bruger => bruger.Brugernavn == brugernavn);
-                    return b;
-                }
-                Brugere br = dataContext.Brugere.FirstOrDefault(bruger => bruger.Id == id);
-                return br;
-            }
-        }
+
         [SuppressMessage("ReSharper", "FunctionNeverReturns")]
         private void SensorLoop()
         {
@@ -642,6 +787,44 @@ namespace WCFServiceWebRole1
                 sBuilder.Append(data[i].ToString("x2"));
             }
             return sBuilder.ToString();
+        }
+
+        private void TraceHjaelp(string[] parametre, string besked)
+        {
+            int i = 0;
+            StackFrame frame = new StackFrame(1);
+            var method = frame.GetMethod();
+            var navn = method.Name;
+            string message = "[" + DateTime.Now + "]" + " - " + navn + "(";
+            foreach (var s in parametre)
+            {
+                if (parametre.Length > i + 1)
+                {
+                    if (s == null)
+                    {
+                        message += "null, ";
+                        i++;
+                    }
+                    else
+                    {
+                        message += s + ", ";
+                        i++;
+                    }
+                }
+                else
+                {
+                    if (s == null)
+                    {
+                        message += "null";
+                    }
+                    else
+                    {
+                        message += s;
+                    }
+                }
+            }
+            message += "): " + besked;
+            Trace.WriteLine(message);
         }
     }
 }

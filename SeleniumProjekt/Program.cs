@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -14,9 +15,14 @@ namespace SeleniumProjekt
     class Program
     {
         private const string Url = "http://localhost/3semesterprojekt/public/index.php";
-        private const string Placering = @"C:\Users\SanneWinther\Dropbox\Projektmappe\Test\Selenium";
+
+        private static string Placering = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName + "/pandpScreenshots/";
         static void Main(string[] args)
         {
+            if (!Directory.Exists(Placering))
+            {
+                Directory.CreateDirectory(Placering);
+            }
             using (IWebDriver webDriver = new ChromeDriver())
             {
                 //Screenshots(webDriver);
