@@ -1,16 +1,16 @@
-DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 11:58:08] Emulator config file set to C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\SemesterProjektWebService\csx\Debug\roles\WCFServiceWebRole1\approot\diagnostics.wadcfgx
-DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 11:58:08] DiagnosticsStoreRootPath set to: C:\Users\Selzamouri\AppData\Local\dftmp\Resources\72af9912-644f-4c1c-b3fa-a45c0f61ea1f
-DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 11:58:08] Loading config file: C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\SemesterProjektWebService\csx\Debug\roles\WCFServiceWebRole1\approot\diagnostics.wadcfgx
-DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 11:58:08] Checking VM Type
-DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 11:58:08] Emulator config file set to C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\SemesterProjektWebService\csx\Debug\roles\WCFServiceWebRole1\approot\diagnostics.wadcfgx
-DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 11:58:08] Extension set to Emulator Mode
-DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 11:58:08] Reading XML configuration file
-DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 11:58:08] Bypassing private config decryption
-DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 11:58:08] Stopping the running plugin, if any
-DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 11:58:08] No DiagnosticsPlugin is running.
-DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 11:58:08] Killing any DiagnosticsPlugin that might remain.
-DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 11:58:08] Killing any MonAgentHost that might remain.
-DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 11:58:08] Diagnostics plugin stopped successfully
-DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 11:58:08] Resetting DiagnosticPlugin
-DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 11:59:18] DiagnosticsPlugin launched successfully with new configuration
-DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 11:59:18] DiagnosticPlugin exited with code 0
+DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 12:28:52] Emulator config file set to C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\SemesterProjektWebService\csx\Debug\roles\WCFServiceWebRole1\approot\diagnostics.wadcfgx
+DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 12:28:52] DiagnosticsStoreRootPath set to: C:\Users\Selzamouri\AppData\Local\dftmp\Resources\b2f5756f-1c2a-4cb8-9885-11d69ccc71fc
+DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 12:28:52] Loading config file: C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\SemesterProjektWebService\csx\Debug\roles\WCFServiceWebRole1\approot\diagnostics.wadcfgx
+DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 12:28:52] Checking VM Type
+DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 12:28:52] Emulator config file set to C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\SemesterProjektWebService\csx\Debug\roles\WCFServiceWebRole1\approot\diagnostics.wadcfgx
+DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 12:28:52] Extension set to Emulator Mode
+DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 12:28:52] Reading XML configuration file
+DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 12:28:52] Bypassing private config decryption
+DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 12:28:52] Stopping the running plugin, if any
+DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 12:28:53] No DiagnosticsPlugin is running.
+DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 12:28:53] Killing any DiagnosticsPlugin that might remain.
+DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 12:28:53] Killing any MonAgentHost that might remain.
+DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 12:28:53] Diagnostics plugin stopped successfully
+DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 12:28:53] Resetting DiagnosticPlugin
+DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 12:30:03] DiagnosticsPlugin launched successfully with new configuration
+DiagnosticsPluginLauncher.exe Information: 0 : [10-12-2015 12:30:03] DiagnosticPlugin exited with code 0
