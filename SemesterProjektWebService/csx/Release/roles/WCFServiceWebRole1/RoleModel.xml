@@ -15,14 +15,14 @@
     <Property name="SetConfiguration" value="Configuration=Release" />
     <Property name="SetPlatform" value="Platform=AnyCPU" />
     <Property name="RoleTargetFramework" value="v4.5" />
-    <Property name="OutputDir" value="C:\Users\Selzamouri\documents\visual studio 2015\Projects\SemesterProjektWebService\SemesterProjektWebService\obj\Release\WCFServiceWebRole1\" />
+    <Property name="OutputDir" value="C:\Users\SanneWinther\Documents\GitHub\3sem\3semesterprojekt1\SemesterProjektWebService\obj\Release\WCFServiceWebRole1\" />
     <Property name="EntryPoint" value="WCFServiceWebRole1.dll" />
-    <Property name="SourceDir" value="C:\Users\Selzamouri\documents\visual studio 2015\Projects\SemesterProjektWebService\WCFServiceWebRole1\" />
-    <Property name="SitePhysicalPath" value="C:\Users\Selzamouri\documents\visual studio 2015\Projects\SemesterProjektWebService\SemesterProjektWebService\obj\Release\WCFServiceWebRole1\" />
+    <Property name="SourceDir" value="C:\Users\SanneWinther\Documents\GitHub\3sem\3semesterprojekt1\WCFServiceWebRole1\" />
+    <Property name="SitePhysicalPath" value="C:\Users\SanneWinther\Documents\GitHub\3sem\3semesterprojekt1\SemesterProjektWebService\obj\Release\WCFServiceWebRole1\" />
     <Property name="TargetRuntimeVersion" value="v4.0" />
   </Properties>
   <Sites>
-    <Site name="Web" physicalDirectory="C:\Users\Selzamouri\documents\visual studio 2015\Projects\SemesterProjektWebService\SemesterProjektWebService\obj\Release\WCFServiceWebRole1\">
+    <Site name="Web" physicalDirectory="C:\Users\SanneWinther\Documents\GitHub\3sem\3semesterprojekt1\SemesterProjektWebService\obj\Release\WCFServiceWebRole1\">
       <Bindings>
         <Binding name="Endpoint1" endpointName="Endpoint1" />
       </Bindings>

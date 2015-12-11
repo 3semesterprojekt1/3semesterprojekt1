@@ -25,7 +25,7 @@
     </Endpoints>
     <Contents>
       <Content destination=".\">
-        <SourceDirectory path="C:\Users\Selzamouri\documents\visual studio 2015\Projects\SemesterProjektWebService\SemesterProjektWebService\rcf\Release\WCFServiceWebRole1Content\" />
+        <SourceDirectory path="C:\Users\SanneWinther\Documents\GitHub\3sem\3semesterprojekt1\SemesterProjektWebService\rcf\Release\WCFServiceWebRole1Content\" />
       </Content>
     </Contents>
   </WebRole>
