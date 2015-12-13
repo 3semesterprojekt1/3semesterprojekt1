@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SemesterProjektWebService" generation="1" functional="0" release="0" Id="1576335e-b28e-48d6-b4fe-974f0fd1698e" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SemesterProjektWebService" generation="1" functional="0" release="0" Id="ea1a0fdb-a0bc-445f-bdbd-25a36cc35c52" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="SemesterProjektWebServiceGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -42,7 +42,7 @@
       </maps>
       <components>
         <groupHascomponents>
-          <role name="WCFServiceWebRole1" generation="1" functional="0" release="0" software="C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\SemesterProjektWebService\csx\Debug\roles\WCFServiceWebRole1" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaIISHost.exe " memIndex="-1" hostingEnvironment="frontendadmin" hostingEnvironmentVersion="2">
+          <role name="WCFServiceWebRole1" generation="1" functional="0" release="0" software="C:\Users\SanneWinther\Documents\GitHub\3sem\3semesterprojekt1\SemesterProjektWebService\csx\Debug\roles\WCFServiceWebRole1" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaIISHost.exe " memIndex="-1" hostingEnvironment="frontendadmin" hostingEnvironmentVersion="2">
             <componentports>
               <inPort name="Endpoint1" protocol="http" portRanges="80" />
             </componentports>
@@ -70,9 +70,9 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="e2abbe1c-be66-4f9f-8f65-8ed32897d37f" ref="Microsoft.RedDog.Contract\ServiceContract\SemesterProjektWebServiceContract@ServiceDefinition">
+    <implementation Id="8be93cb4-3406-4ad4-93b5-aa1886f1fe60" ref="Microsoft.RedDog.Contract\ServiceContract\SemesterProjektWebServiceContract@ServiceDefinition">
       <interfacereferences>
-        <interfaceReference Id="7edec247-3e75-42f6-a9df-dd65c13d7de9" ref="Microsoft.RedDog.Contract\Interface\WCFServiceWebRole1:Endpoint1@ServiceDefinition">
+        <interfaceReference Id="4ef288b6-a727-4ee3-86ee-5138986dfc6c" ref="Microsoft.RedDog.Contract\Interface\WCFServiceWebRole1:Endpoint1@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/SemesterProjektWebService/SemesterProjektWebServiceGroup/WCFServiceWebRole1:Endpoint1" />
           </inPort>

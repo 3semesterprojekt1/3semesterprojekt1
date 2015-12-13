@@ -562,29 +562,34 @@ namespace WCFServiceWebRole1
         public List<Politistatistik> ScrapeStatistik()
         {
             List<Politistatistik> politistatistik = new List<Politistatistik>();
-            int aarsTal = 2007;
-            using (IWebDriver webDriver = new PhantomJSDriver())
+            try
             {
-                webDriver.Navigate().GoToUrl("http://www.politistatistik.dk/parameter.aspx?id=27");
-
-                webDriver.FindElement(By.XPath("//*[@id='geo00']/optgroup/option[8]")).Click();
-                webDriver.FindElement(By.XPath("//*[@id='kriminalitet01']/optgroup[2]/option[5]")).Click();
-                webDriver.FindElement(By.XPath("//*[@id='rightCloBaggr']/div[5]/div[3]/div[2]/input")).Click();
-                foreach (var aar in webDriver.FindElements(By.XPath("//*[@name='periodeYear']")))
+                int aarsTal = 2007;
+                using (IWebDriver webDriver = new PhantomJSDriver())
                 {
-                    aar.Click();
-                }
-                webDriver.FindElement(By.XPath("//*[@id='rightCol']/div[2]/div/div[3]/img")).Click();
-                webDriver.SwitchTo().Window(webDriver.WindowHandles.Last());
+                    webDriver.Navigate().GoToUrl("http://www.politistatistik.dk/parameter.aspx?id=27");
 
-                foreach (var item in webDriver.FindElements(By.ClassName("dataitem")))
-                {
-                    politistatistik.Add(new Politistatistik(aarsTal++, item.Text));
+                    webDriver.FindElement(By.XPath("//*[@id='geo00']/optgroup/option[8]")).Click();
+                    webDriver.FindElement(By.XPath("//*[@id='kriminalitet01']/optgroup[2]/option[5]")).Click();
+                    webDriver.FindElement(By.XPath("//*[@id='rightCloBaggr']/div[5]/div[3]/div[2]/input")).Click();
+                    foreach (var aar in webDriver.FindElements(By.XPath("//*[@name='periodeYear']")))
+                    {
+                        aar.Click();
+                    }
+                    webDriver.FindElement(By.XPath("//*[@id='rightCol']/div[2]/div/div[3]/img")).Click();
+                    webDriver.SwitchTo().Window(webDriver.WindowHandles.Last());
+
+                    foreach (var item in webDriver.FindElements(By.ClassName("dataitem")))
+                    {
+                        politistatistik.Add(new Politistatistik(aarsTal++, item.Text));
+                    }
                 }
+                List<Politistatistik> list = politistatistik.ToList();
+                TraceHjaelp(new[] { "" }, list.ToString());
+                return list;
             }
-            List<Politistatistik> list = politistatistik.ToList();
-            TraceHjaelp(new []{""}, list.ToString());
-            return list;
+            catch (Exception) {}
+            return politistatistik.ToList();
         }
 
         /// <summary>
