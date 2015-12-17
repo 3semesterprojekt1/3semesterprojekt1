@@ -25,14 +25,8 @@
     </Endpoints>
     <Contents>
       <Content destination=".\">
-        <SourceDirectory path="C:\Users\SanneWinther\Documents\GitHub\3sem\3semesterprojekt1\SemesterProjektWebService\rcf\Debug\WCFServiceWebRole1Content\" />
-      </Content>
-      <Content destination=".\">
-        <SourceDirectory path="C:\Users\SanneWinther\Documents\GitHub\3sem\3semesterprojekt1\SemesterProjektWebService\ecf\WCFServiceWebRole1Content\" />
+        <SourceDirectory path="C:\Users\Selzamouri\Documents\GitHub\3semesterprojekt1\SemesterProjektWebService\rcf\Debug\WCFServiceWebRole1Content\" />
       </Content>
     </Contents>
-    <Imports>
-      <Import moduleName="Diagnostics" />
-    </Imports>
   </WebRole>
 </ServiceDefinition>

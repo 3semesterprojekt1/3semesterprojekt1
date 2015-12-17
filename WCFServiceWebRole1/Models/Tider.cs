@@ -24,9 +24,13 @@ namespace WCFServiceWebRole1.Models
         {
             TimeSpan f = TimeSpan.Parse(fra);
 
-            if (f >= new TimeSpan(23, 59, 59) || f == new TimeSpan(-1, 0, 0))
+            if (f >= new TimeSpan(23, 59, 59))
             {
-                throw new ArgumentException("Tallet er forkert");
+                throw new ArgumentException("Fra skal være mindre eller lig med 24:00:00");
+            }
+            if (f < new TimeSpan(00, 00, 00))
+            {
+                throw new ArgumentException("Fra skal være større eller lig med 00:00:00");
             }
 
         }
@@ -34,10 +38,15 @@ namespace WCFServiceWebRole1.Models
         public void Checktil(string til)
         {
             TimeSpan t = TimeSpan.Parse(til);
-            if (t >= new TimeSpan(23, 59, 59) || t == new TimeSpan(-1, 0, 0))
+            if (t >= new TimeSpan(23, 59, 59))
             {
-                throw new ArgumentException("Tallet er forkert");
+                throw new ArgumentException("Til skal være mindre eller lig med 24:00:00");
             }
+            if (t < new TimeSpan(00, 00, 00))
+            {
+                throw new ArgumentException("Til skal være større eller lig med 00:00:00");
+            }
+            
 
         }
 

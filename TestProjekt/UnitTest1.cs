@@ -338,13 +338,13 @@ namespace TestProjekt
         [TestMethod]
         public void TestHentTemperatur() //Unittest (Antal temperature i intervallet 3-6)
         {
-            Assert.AreEqual(7, client.HentTemperatur(3, 11));
+            Assert.AreEqual(98, client.HentTemperatur(3, 11));
         }
 
         [TestMethod]
         public void TestHentTemperatur1() //Integrationstest (Antal temperature i intervallet 3-6)
         {
-            Assert.AreEqual(7, client.HentTemperatur(3, 11));
+            Assert.AreEqual(98, client.HentTemperatur(3, 11));
         }
 
         #endregion
@@ -354,13 +354,13 @@ namespace TestProjekt
         [TestMethod]
         public void TestHentTidspunkt() //Unittest
         {
-            Assert.AreEqual(4, service.HentTidspunkt(2015, 11, 11));
+            Assert.AreEqual(5, service.HentTidspunkt(2015, 11, 11));
         }
 
         [TestMethod]
         public void TestHentTidspunkt1() //Integrationstest
         {
-            Assert.AreEqual(4, client.HentTidspunkt(2015, 11, 11));
+            Assert.AreEqual(5, client.HentTidspunkt(2015, 11, 11));
         }
 
         #endregion
@@ -429,20 +429,20 @@ namespace TestProjekt
         [TestMethod]
         public void TestHentBevaegelse() //Unittest
         {
-            Assert.AreEqual(7, service.HentBevaegelser("lol", "we").Count());
+            Assert.AreEqual(559, service.HentBevaegelser("lol", "we").Count());
         }
 
         [TestMethod]
         public void TestHentBevaegelse1() //Integrationstest
         {
-            Assert.AreEqual(7, client.HentBevaegelser("lol","we").Count());
+            Assert.AreEqual(559, client.HentBevaegelser("lol","we").Count());
         }
 
         [TestMethod]
         public void TestHentBevaegelseSorterTidspunktFaldende()
         {
             Bevaegelser b = service.HentBevaegelser("Tidspunkt", "faldende")[0];
-            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 11, 11), new TimeSpan(23, 00, 00), 3);
+            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 08, 15), new TimeSpan(23, 57, 00), decimal.Parse("4.02"));
             Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
         }
 
@@ -450,7 +450,7 @@ namespace TestProjekt
         public void TestHentBevaegelseSorterTidspunktStigende()
         {
             Bevaegelser b = service.HentBevaegelser("Tidspunkt", "stigende")[0];
-            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 01, 01), new TimeSpan(21, 00, 00), 3);
+            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 03, 14), new TimeSpan(00, 00, 00), decimal.Parse("-1.13"));
             Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
         }
 
@@ -458,7 +458,7 @@ namespace TestProjekt
         public void TestHentBevaegelseSorterDatoFaldende()
         {
             Bevaegelser b = service.HentBevaegelser("Dato", "faldende")[0];
-            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 11, 11), new TimeSpan(23, 00, 00), 3);
+            Bevaegelser b1 = new Bevaegelser(new DateTime(2016, 12, 29), new TimeSpan(21, 02, 00), decimal.Parse("14.69"));
             Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
         }
 
@@ -466,31 +466,33 @@ namespace TestProjekt
         public void TestHentBevaegelseSorterDatoStigende()
         {
             Bevaegelser b = service.HentBevaegelser("Dato", "stigende")[0];
-            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 01, 01), new TimeSpan(21, 00, 00), 3);
+            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 1, 1), new TimeSpan(13, 35, 00), decimal.Parse("23.59"));
             Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
         }
 
         [TestMethod]
         public void TestHentBevaegelseSorterTemperaturFaldende()
         {
-            Bevaegelser b = service.HentBevaegelser("Dato", "faldende")[0];
-            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 11, 11), new TimeSpan(23, 00, 00), 3);
+            Bevaegelser b = service.HentBevaegelser("Temperatur", "faldende")[0];
+            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 10, 01), new TimeSpan(15, 04, 00), decimal.Parse("29.94"));
             Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
         }
 
         [TestMethod]
         public void TestHentBevaegelseSorterTemperaturStigende()
         {
-            Bevaegelser b = service.HentBevaegelser("Dato", "stigende")[0];
-            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 01, 01), new TimeSpan(21, 00, 00), 3);
+            Bevaegelser b = service.HentBevaegelser("Temperatur", "stigende")[0];
+            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 03, 30), new TimeSpan(06, 09, 00), decimal.Parse("-19.83"));
             Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
         }
+
+        //INTEGRATIONSTEST
 
         [TestMethod]
         public void TestHentBevaegelseSorterTidspunktFaldende1()
         {
             Bevaegelser b = client.HentBevaegelser("Tidspunkt", "faldende")[0];
-            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 11, 11), new TimeSpan(23, 00, 00), 3);
+            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 08, 15), new TimeSpan(23, 57, 00), decimal.Parse("4.02"));
             Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
         }
 
@@ -498,7 +500,7 @@ namespace TestProjekt
         public void TestHentBevaegelseSorterTidspunktStigende1()
         {
             Bevaegelser b = client.HentBevaegelser("Tidspunkt", "stigende")[0];
-            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 01, 01), new TimeSpan(21, 00, 00), 3);
+            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 03, 14), new TimeSpan(00, 00, 00), decimal.Parse("-1.13"));
             Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
         }
 
@@ -506,7 +508,7 @@ namespace TestProjekt
         public void TestHentBevaegelseSorterDatoFaldende1()
         {
             Bevaegelser b = client.HentBevaegelser("Dato", "faldende")[0];
-            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 11, 11), new TimeSpan(23, 00, 00), 3);
+            Bevaegelser b1 = new Bevaegelser(new DateTime(2016, 12, 29), new TimeSpan(21, 02, 00), decimal.Parse("14.69"));
             Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
         }
 
@@ -514,23 +516,23 @@ namespace TestProjekt
         public void TestHentBevaegelseSorterDatoStigende1()
         {
             Bevaegelser b = client.HentBevaegelser("Dato", "stigende")[0];
-            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 01, 01), new TimeSpan(21, 00, 00), 3);
+            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 1, 1), new TimeSpan(13, 35, 00), decimal.Parse("23.59"));
             Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
         }
 
         [TestMethod]
         public void TestHentBevaegelseSorterTemperaturFaldende1()
         {
-            Bevaegelser b = client.HentBevaegelser("Dato", "faldende")[0];
-            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 11, 11), new TimeSpan(23, 00, 00), 3);
+            Bevaegelser b = client.HentBevaegelser("Temperatur", "faldende")[0];
+            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 10, 01), new TimeSpan(15, 04, 00), decimal.Parse("29.94"));
             Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
         }
 
         [TestMethod]
         public void TestHentBevaegelseSorterTemperaturStigende1()
         {
-            Bevaegelser b = client.HentBevaegelser("Dato", "stigende")[0];
-            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 01, 01), new TimeSpan(21, 00, 00), 3);
+            Bevaegelser b = client.HentBevaegelser("Temperatur", "stigende")[0];
+            Bevaegelser b1 = new Bevaegelser(new DateTime(2015, 03, 30), new TimeSpan(06, 09, 00), decimal.Parse("-19.83"));
             Assert.AreEqual(b1.Tidspunkt, b.Tidspunkt);
         }
 
@@ -548,7 +550,7 @@ namespace TestProjekt
         [TestMethod]
         public void TestLogin1() //Integrationstest
         {
-            string s = service.Login("Michael", "Secret12");
+            string s = service.Login("ikkeetbrugernavnderfindes", "Secret12");
             Assert.AreEqual("Brugernavnet/passwordet er forkert", s);
         }
 
