@@ -10,7 +10,7 @@ namespace WCFServiceWebRole1
     public partial class DataContext : DbContext
     {
         public DataContext()
-            : base("name=DataContext")
+            : base("name=DataContext6")
         {
             Configuration.ProxyCreationEnabled = false;
         }
